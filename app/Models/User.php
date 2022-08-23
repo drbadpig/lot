@@ -59,4 +59,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Talk::class);
     }
+
+    public function achievements()
+    {
+        return $this->belongsToMany(Achievement::class, 'users_achievements', 'user_id', 'achievement_id');
+    }
 }
