@@ -75,23 +75,9 @@
 {{--                <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>--}}
 {{--            </div>--}}
 
-{{--            <div class="mt-3 space-y-1">--}}
-{{--                <!-- Authentication -->--}}
-{{--                <form method="POST" action="{{ route('logout') }}">--}}
-{{--                    @csrf--}}
-
-{{--                    <x-responsive-nav-link :href="route('logout')"--}}
-{{--                            onclick="event.preventDefault();--}}
-{{--                                        this.closest('form').submit();">--}}
-{{--                        {{ __('Log Out') }}--}}
-{{--                    </x-responsive-nav-link>--}}
-{{--                </form>--}}
-{{--            </div>--}}
 {{--        </div>--}}
 {{--    </div>--}}
 {{--</nav>--}}
-
-
 <nav
     class="sticky top-0 z-40 w-full backdrop-blur flex-none transition-colors duration-500 border-b border-slate-50/[0.06] bg-black/20 supports-backdrop-blur:bg-white/95">
     <div class="max-w-8xl mx-auto">
@@ -122,21 +108,32 @@
 
                     <div class="flex items-center border-l border-slate-200 ml-6 dark:border-slate-400">
 
-                        <a href="{{ route('user', ['id' => auth()->id()]) }}"
-                           class="ml-6 block text-slate-400 hover:text-slate-500 dark:hover:text-slate-300">
-                            <span class="sr-only">Profile</span>
-                            <x-icons.profile-icon class="h-6 w-6"/>
-                        </a>
-
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
-                            <a href="{{ route('logout') }}"
-                               onclick="event.preventDefault(); this.closest('form').submit();"
+                        @if (Auth::check())
+                            <a href="{{ route('user', ['id' => Auth::user()->id]) }}"
                                class="ml-6 block text-slate-400 hover:text-slate-500 dark:hover:text-slate-300">
-                                <span class="sr-only">Выйти</span>
-                                <x-icons.logout-icon class="h-6 w-6"/>
+                                <span class="sr-only">Profile</span>
+                                <x-icons.profile-icon class="h-6 w-6"/>
                             </a>
-                        </form>
+                        @else
+                            <a href="{{ route('login') }}"
+                               class="ml-6 block text-slate-400 hover:text-slate-500 dark:hover:text-slate-300">
+                                <span class="sr-only">Profile</span>
+                                <x-icons.profile-icon class="h-6 w-6"/>
+                            </a>
+                        @endif
+
+
+                        @unless (!Auth::check())
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <a href="{{ route('logout') }}"
+                                   onclick="event.preventDefault(); this.closest('form').submit();"
+                                   class="ml-6 block text-slate-400 hover:text-slate-500 dark:hover:text-slate-300">
+                                    <span class="sr-only">Выйти</span>
+                                    <x-icons.logout-icon class="h-6 w-6"/>
+                                </a>
+                            </form>
+                        @endunless
 
                     </div>
                 </div>
