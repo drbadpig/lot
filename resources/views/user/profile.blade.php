@@ -1,6 +1,6 @@
-<x-app-layout>
+<x-app-layout title="{{ $user->username }}">
     <!-- Title -->
-    <h1 class="hidden">{{ $title }}</h1>
+    <h1 class="hidden">Профиль {{  $user->username }}</h1>
 
     <!-- Background image -->
     <div class="fixed top-0 right-0 left-0 bottom-0 opacity-40 blur-md bg-cover bg-center bg-no-repeat"
@@ -15,11 +15,11 @@
             <x-icons.adjustments-icon class="h-6 w-6"/>
         </button>
 
-        <button type="button"
+        <a href="{{ route('settings') }}"
                 class="absolute top-40 right-4 z-30 text-slate-400 hover:text-slate-500 dark:hover:text-slate-300 p-4 rounded-lg backdrop-blur border border-slate-900/10 dark:border-slate-50/[0.06] bg-black/20 supports-backdrop-blur:bg-white/95"
         >
             <x-icons.cog-icon class="h-6 w-6"/>
-        </button>
+        </a>
     @endif
 
     <div class="container mx-auto p-8 flex flex-row relative z-10">

@@ -16,7 +16,6 @@ class UserController extends Controller
 //        dd(User::findOrFail($id));
         return view('user.profile', [
             'user' => User::findOrFail($id),
-            'title' => 'Профиль',
         ]);
     }
 }
