@@ -1,6 +1,5 @@
 <x-guest-layout>
 
-
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
@@ -9,9 +8,9 @@
 
             <!-- Name -->
             <div>
-                <x-label for="name" :value="__('Имя пользователя')" />
+                <x-label for="username" :value="__('Имя пользователя')" />
 
-                <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('Имя пользователя')" required autofocus />
+                <x-input id="username" class="block mt-1 w-full" type="text" name="username" :value="old('Имя пользователя')" required autofocus />
             </div>
 
             <!-- Email Address -->
