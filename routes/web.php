@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\TestContorller;
+use App\Http\Controllers\User\SettingsController;
 use App\Http\Controllers\User\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -21,10 +22,26 @@ Route::get('/', function () {
 
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+})->middleware(['verified'])->name('dashboard');
 
 require __DIR__.'/auth.php';
 
 Route::get('/test', [TestContorller::class, 'index']);
 
+Route::get('/talk', function () {
+    return view('talk.show');
+});
+
+Route::get('/category/news', function () {
+    return view('talk.category');
+});
+
+Route::get('/category/news-lol', function () {
+    return view('talk.list');
+});
+
 Route::get('/user/{id}', [UserController::class, 'show'])->name('user');
+
+// settings
+
+Route::get('/settings', [SettingsController::class, 'create'])->middleware('auth')->name('settings');

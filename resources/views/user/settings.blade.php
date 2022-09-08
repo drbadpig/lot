@@ -6,7 +6,7 @@
         <h1 class="text-3xl uppercase mb-6">Настройки</h1>
 
         <div
-            class="w-fit rounded-lg backdrop-blur border border-slate-900/10 dark:border-slate-50/[0.06] bg-black/20 supports-backdrop-blur:bg-white/95 p-3 mb-3">
+            class="w-full rounded-lg backdrop-blur border border-slate-900/10 dark:border-slate-50/[0.06] bg-black/20 supports-backdrop-blur:bg-white/95 p-3 mb-3">
             <div class="flex text-lg">
                 <div class="w-[200px]">
                     <span class="">Фото профиля</span>
@@ -54,7 +54,7 @@
                         </div>
                     </div>
                 </div>
-                <x-button class="px-14">
+                <x-button class="px-12">
                     {{ __('Сохранить') }}
                 </x-button>
             </form>
@@ -90,7 +90,7 @@
                                  required/>
                     </div>
                 </div>
-                <x-button class="px-14">
+                <x-button class="px-12">
                     {{ __('Сохранить') }}
                 </x-button>
             </form>
