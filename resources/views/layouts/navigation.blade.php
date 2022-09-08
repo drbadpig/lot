@@ -90,13 +90,16 @@
                 </a>
 
                 <a href="https://www.leagueoflegends.com/" target="_blank" class="ml-6">
-                    <img class="max-h-[25px]" src="lol_logo.png" alt="lol logo">
+                    <img class="max-h-[25px]" src="{{ asset('lol_logo.png') }}" alt="lol logo">
                 </a>
 
 
                 <div class="relative hidden lg:flex items-center ml-auto">
                     <nav class="text-sm leading-6 font-semibold text-slate-700 dark:text-slate-200">
                         <ul class="flex space-x-8">
+                            <li>
+                                <a class="hover:text-active" href="#">Добавить обсуждение</a>
+                            </li>
                             <li>
                                 <a class="hover:text-active" href="#">Категории</a>
                             </li>
@@ -112,13 +115,13 @@
                             <a href="{{ route('user', ['id' => Auth::user()->id]) }}"
                                class="ml-6 block text-slate-400 hover:text-slate-500 dark:hover:text-slate-300">
                                 <span class="sr-only">Profile</span>
-                                <x-icons.profile-icon class="h-6 w-6"/>
+                                <x-heroicon-o-user-circle class="h-6 w-6"/>
                             </a>
                         @else
                             <a href="{{ route('login') }}"
                                class="ml-6 block text-slate-400 hover:text-slate-500 dark:hover:text-slate-300">
                                 <span class="sr-only">Profile</span>
-                                <x-icons.profile-icon class="h-6 w-6"/>
+                                <x-heroicon-o-user-circle class="h-6 w-6"/>
                             </a>
                         @endif
 
@@ -130,7 +133,7 @@
                                    onclick="event.preventDefault(); this.closest('form').submit();"
                                    class="ml-6 block text-slate-400 hover:text-slate-500 dark:hover:text-slate-300">
                                     <span class="sr-only">Выйти</span>
-                                    <x-icons.logout-icon class="h-6 w-6"/>
+                                    <x-heroicon-o-arrow-left-on-rectangle class="h-6 w-6"/>
                                 </a>
                             </form>
                         @endunless
