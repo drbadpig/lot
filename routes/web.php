@@ -44,4 +44,11 @@ Route::get('/user/{id}', [UserController::class, 'show'])->name('user');
 
 // settings
 
-Route::get('/settings', [SettingsController::class, 'create'])->middleware('auth')->name('settings');
+Route::group(['prefix' => 'settings', 'middleware' => 'auth'], function() {
+    Route::get('/', [SettingsController::class, 'create'])->middleware('auth')->name('settings');
+    Route::post('/image', [SettingsController::class, 'updateImage'])->name('settings.image');
+    Route::post('/password', [SettingsController::class, 'updatePassword'])->name('settings.password');
+    Route::post('/personal', [SettingsController::class, 'updatePersonal'])->name('settings.personal');
+});
+
+

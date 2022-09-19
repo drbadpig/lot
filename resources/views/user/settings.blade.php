@@ -7,25 +7,31 @@
 
         <div
             class="w-full rounded-lg backdrop-blur border border-slate-900/10 dark:border-slate-50/[0.06] bg-black/20 supports-backdrop-blur:bg-white/95 p-3 mb-3">
-            <div class="flex text-lg">
-                <div class="w-[200px]">
-                    <span class="">Фото профиля</span>
-                </div>
+            <!-- Validation Errors -->
+            <x-auth-validation-errors class="mb-4" :errors="$errors"/>
+            <form class="mb-4" method="post" enctype="multipart/form-data"
+                  action="{{ route('settings.image') }}">
+                @csrf
+                <div class="flex text-lg">
+                    <div class="w-[200px]">
+                        <label for="image" class="">Фото профиля</label>
+                    </div>
+                    <div class="w-[400px] mb-4 flex flex-col">
+                        <img class="max-w-[150px] mb-4" src="{{ asset(Auth::user()->image) }}" alt="profile photo">
+                        <input type="file" name="image" id="image">
+                    </div>
 
-                <div class="w-[400px] mb-4 flex flex-col">
-                    <img class="max-w-[150px] mb-4" src="{{ asset('avatar.png') }}" alt="profile photo">
-                    <form>
-                        @csrf
-                        <input type="file" name="profile">
-                    </form>
                 </div>
-            </div>
-            <form class="mb-4">
+                <x-button class="px-12">
+                    {{ __('Сохранить') }}
+                </x-button>
+            </form>
+            <form class="mb-4" method="post" action="{{ route('settings.personal') }}">
                 @csrf
 
                 <div class="flex text-lg items-center mb-4">
                     <div class="w-[200px]">
-                        <span class="">Логин</span>
+                        <label for="username" class="">Логин</label>
                     </div>
 
                     <div class="w-[400px]">
@@ -35,7 +41,7 @@
                 </div>
                 <div class="flex text-lg items-center mb-4">
                     <div class="w-[200px]">
-                        <span class="">Почта</span>
+                        <label for="email" class="">Почта</label>
                     </div>
 
                     <div class="w-[400px]">
@@ -58,35 +64,36 @@
                     {{ __('Сохранить') }}
                 </x-button>
             </form>
-            <form class="mb-4">
+            <form class="mb-4" method="post" action="{{ route('settings.password') }}">
                 @csrf
                 <div class="flex text-lg items-center mb-4">
                     <div class="w-[200px]">
-                        <span class="">Старый пароль</span>
+                        <label for="current_password" class="">Старый пароль</label>
                     </div>
 
                     <div class="w-[400px]">
-                        <x-input class="w-[400px]" id="email" :value="old('dd')" name="email" type="email"
+                        <x-input class="w-[400px]" id="current_password" name="current_password" type="password"
                                  required/>
                     </div>
                 </div>
                 <div class="flex text-lg items-center mb-4">
                     <div class="w-[200px]">
-                        <span class="">Новый пароль</span>
+                        <label for="password" class="">Новый пароль</label>
                     </div>
 
                     <div class="w-[400px]">
-                        <x-input class="w-[400px]" id="email" :value="old('dd')" name="email" type="email"
-                                 required/>
+                        <x-input class="w-[400px]" id="password" name="password" type="password"
+                                 required autocomplete="new-password"/>
                     </div>
                 </div>
                 <div class="flex text-lg items-center mb-4">
                     <div class="w-[200px]">
-                        <span class="">Ещё раз</span>
+                        <label for="password_confirmation" class="">Повторите</label>
                     </div>
 
                     <div class="w-[400px]">
-                        <x-input class="w-[400px]" id="email" :value="old('dd')" name="email" type="email"
+                        <x-input class="w-[400px]" id="password_confirmation" name="password_confirmation"
+                                 type="password"
                                  required/>
                     </div>
                 </div>

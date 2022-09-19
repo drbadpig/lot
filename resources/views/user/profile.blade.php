@@ -76,7 +76,7 @@
     <div class="container mx-auto p-8 flex flex-row relative z-10">
 
         <div class="basis-1/4">
-            <img class="w-full mb-2 rounded-lg" src="{{asset('avatar.png')}}" alt="PHOTO">
+            <img class="w-full mb-2 rounded-lg" src="{{asset($user->image)}}" alt="PHOTO">
 
             <span class="text-slate-400">Был в сети: сегодня</span>
 
