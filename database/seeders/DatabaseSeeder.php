@@ -14,6 +14,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        // BackgroundImage
+        \App\Models\BackgroundImage::factory(1)->create();
         // roles
         \App\Models\Role::factory(4)->create();
         // users
