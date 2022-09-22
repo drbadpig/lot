@@ -64,4 +64,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Achievement::class, 'users_achievements', 'user_id', 'achievement_id');
     }
+
+    public function backgroundImage()
+    {
+        return $this->belongsTo(BackgroundImage::class);
+    }
 }
