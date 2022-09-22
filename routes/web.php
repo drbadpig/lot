@@ -41,6 +41,7 @@ Route::get('/category/news-lol', function () {
 });
 
 Route::get('/user/{id}', [UserController::class, 'show'])->name('user');
+Route::post('/user/background', [UserController::class, 'updateBackground'])->name('user.background');
 
 // settings
 

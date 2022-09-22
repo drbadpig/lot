@@ -1,28 +1,34 @@
 <x-app-layout title="{{ $user->username }}">
     <!-- Title -->
-    <h1 class="hidden">Профиль {{  $user->username }}</h1>
+    <h1 class="hidden">Профиль {{ $user->username }}</h1>
 
-    <div id="modal-bg-customs" class="relative z-40" aria-labelledby="modal-title" role="dialog" aria-modal="true" style="display: none;">
+    <div id="modal-bg-customs" class="relative z-40" aria-labelledby="modal-title" role="dialog" aria-modal="true"
+         style="display: none;">
         <div class="fixed inset-0 bg-black/20 transition-opacity backdrop-blur"></div>
         <div class="fixed inset-0 z-10 overflow-y-auto">
-            <div id="modal-bg-customs-panel" class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
-                <div class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
-                    <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                        <div class="sm:flex sm:items-start">
-                            <div class="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
-                                <x-heroicon-o-exclamation-triangle class="h-6 w-6 text-red-600"/>
-                            </div>
-                            <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                                <h3 class="text-lg font-medium leading-6 text-gray-900" id="modal-title">Deactivate account</h3>
-                                <div class="mt-2">
-                                    <p class="text-sm text-gray-500">Are you sure you want to deactivate your account? All of your data will be permanently removed. This action cannot be undone.</p>
-                                </div>
-                            </div>
+            <div id="modal-bg-customs-panel"
+                 class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                <div
+                    class="relative transform overflow-hidden rounded-lg bg-black text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
+                    <div class="bg-primary/90 backdrop-blur px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                        <div id="images"
+                             class="flex flex-wrap items-center justify-between max-h-[400px] overflow-y-auto scrollbar-thin scrollbar-thumb-graphics scrollbar-track-gray-100/0 pb-12">
+                            @foreach($backgrounds as $background)
+                                <img data-id="{{$background->id}}" class="w-[13.5rem] mb-5 mr-4 cursor-pointer"
+                                     alt="$background->path" src="{{ asset($background->path) }}">
+                            @endforeach
                         </div>
-                    </div>
-                    <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
-                        <button id="btn-accept" type="button" class="inline-flex w-full justify-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm">Deactivate</button>
-                        <button id="btn-cancel" type="button" class="mt-3 inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">Cancel</button>
+                        <div
+                            class="border-slate-50/[0.06] absolute bottom-0 left-0 right-0 bg-black/20 backdrop-blur px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+                            <button id="btn-accept" type="button"
+                                    class="inline-flex mr-4 w-full justify-center rounded-md border border-transparent bg-active px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-activeLight focus:outline-none  sm:ml-3 sm:w-auto sm:text-sm">
+                                Применить
+                            </button>
+                            <button id="btn-cancel" type="button"
+                                    class="mt-3 inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
+                                Отмена
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -30,8 +36,8 @@
     </div>
 
     <!-- Background image -->
-    <div class="fixed top-0 right-0 left-0 bottom-0 opacity-40 blur-md bg-cover bg-center bg-no-repeat"
-         style="background-image: url('../backgrounds/bg-serapgine-ocean.jpg')">
+    <div id="bg-image" class="fixed top-0 right-0 left-0 bottom-0 opacity-40 blur-md bg-cover bg-center bg-no-repeat"
+         style="background-image: url('{{asset(Auth::user()->backgroundImage->path)}}')">
     </div>
 
     <!-- Settings buttons -->
@@ -102,24 +108,78 @@
         let modal = document.getElementById("modal-bg-customs");
         let modalPanel = document.getElementById("modal-bg-customs-panel");
 
-        let btn = document.getElementById("open-bg-customs");
+        let btnOpen = document.getElementById("open-bg-customs");
+        let btnCancel = document.getElementById("btn-cancel");
+        let btnAccept = document.getElementById("btn-accept");
 
-        let button = document.getElementById("btn-accept");
+        let imagesParent = document.getElementById("images");
 
-        // We want the modal to open when the Open button is clicked
-        btn.onclick = function() {
+        btnOpen.onclick = function () {
             modal.style.display = "block";
         }
-        // We want the modal to close when the OK button is clicked
-        button.onclick = function() {
+        btnCancel.onclick = function () {
             modal.style.display = "none";
         }
+        // btnAccept.onclick = function() {
+        //     modal.style.display = "none";
+        // }
 
         // The modal will close when the user clicks anywhere outside the modal
-        window.onclick = function(event) {
-            if (event.target == modalPanel) {
+        window.onclick = function (event) {
+            if (event.target === modalPanel) {
                 modal.style.display = "none";
             }
         }
+
+        let selectedImage = 0;
+
+        imagesParent.addEventListener('click', e => {
+            if (e.target.tagName === 'IMG') {
+                if (selectedImage !== 0) {
+                    selectedImage.style.border = "none";
+                }
+
+                selectedImage = e.target;
+                selectedImage.style.border = "2px solid #c79b3b";
+            }
+        })
+
+        $('#btn-accept').on('click', function () {
+
+            let id = selectedImage.dataset.id;
+            console.log(id);
+
+            $.ajax({
+
+                url: '{!! route('user.background') !!}',
+
+                type: "POST",
+
+                data: {id: id},
+
+                headers: {
+
+                    'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+
+                },
+
+                success: function (data) {
+
+                    modal.style.display = "none";
+
+                    $('#bg-image').css('background-image', 'url("' + data['path'] + '")');
+                },
+
+                error: function (msg) {
+
+                    alert('Ошибка');
+
+                }
+
+            });
+
+        });
+
+
     </script>
 </x-app-layout>
