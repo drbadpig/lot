@@ -19,7 +19,7 @@
                     <div class="input-group">
                         <div class="custom-file">
                             <input type="file" class="custom-file-input" id="image" name="image">
-                            <label class="custom-file-label" for="file"></label>
+                            <label class="custom-file-label" for="image"></label>
                         </div>
                         <div class="input-group-append">
                             <span class="input-group-text">Загрузить</span>
