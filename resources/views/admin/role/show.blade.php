@@ -1,5 +1,9 @@
 <x-admin-layout title="Роль">
-    <a href="{{ route('admin.role.edit', [$role->id]) }}" class="btn btn-primary">Редактировать</a>
+    @if($role->id == 1 || $role->id == 2)
+        <p class="mt-3 text-lg">Эту роль нельзя редактировать</p>
+    @else
+        <a href="{{ route('admin.role.edit', [$role->id]) }}" class="btn btn-primary">Редактировать</a>
+    @endif
     <div class="row mt-3 text-lg">
         <div class="col-sm-3">
             <span>ID</span>
