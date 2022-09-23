@@ -17,6 +17,7 @@ class BackgroundImageFactory extends Factory
     public function definition()
     {
         return [
+            'name' => 'none',
             'path' => 'storage/backgrounds/none.jpg',
         ];
     }
