@@ -77,6 +77,16 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
         Route::post('/{id}', [\App\Http\Controllers\Admin\RoleController::class, 'update'])->name('admin.role.update');
         Route::post('/{id}/delete', [\App\Http\Controllers\Admin\RoleController::class, 'destroy'])->name('admin.role.destroy');
     });
+
+    Route::group(['prefix' => 'backgrounds'], function() {
+        Route::get('/', [\App\Http\Controllers\Admin\BackgroundImageController::class, 'index'])->name('admin.background.index');
+        Route::get('/create', [\App\Http\Controllers\Admin\BackgroundImageController::class, 'create'])->name('admin.background.create');
+        Route::post('/', [\App\Http\Controllers\Admin\BackgroundImageController::class, 'store'])->name('admin.background.store');
+        Route::get('/{id}', [\App\Http\Controllers\Admin\BackgroundImageController::class, 'show'])->name('admin.background.show');
+        Route::get('/{id}/edit', [\App\Http\Controllers\Admin\BackgroundImageController::class, 'edit'])->name('admin.background.edit');
+        Route::post('/{id}', [\App\Http\Controllers\Admin\BackgroundImageController::class, 'update'])->name('admin.background.update');
+        Route::post('/{id}/delete', [\App\Http\Controllers\Admin\BackgroundImageController::class, 'destroy'])->name('admin.background.destroy');
+    });
 });
 
 

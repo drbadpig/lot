@@ -73,6 +73,14 @@
                             </p>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="{{ route('admin.background.index') }}" class="nav-link">
+                            <i class="nav-icon fas fa-image"></i>
+                            <p>
+                                Фоны профиля
+                            </p>
+                        </a>
+                    </li>
                 </ul>
             </nav>
             <!-- /.sidebar-menu -->
