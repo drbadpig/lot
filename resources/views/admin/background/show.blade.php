@@ -1,5 +1,9 @@
 <x-admin-layout title="Фон профиля">
-    <a href="{{ route('admin.background.edit', [$background->id]) }}" class="btn btn-primary">Редактировать</a>
+    @if($background->id == 1)
+        <p class="mt-3 text-lg">Этот фон нельзя редактировать</p>
+    @else
+        <a href="{{ route('admin.background.edit', [$background->id]) }}" class="btn btn-primary">Редактировать</a>
+    @endif
     <img alt="{{ $background->name }}" src="{{ asset($background->path) }}" width="600px" class="mt-3">
     <div class="row mt-3 text-lg">
         <div class="col-sm-3">
