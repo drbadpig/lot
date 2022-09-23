@@ -64,6 +64,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
         Route::get('/{id}/edit', [\App\Http\Controllers\Admin\UserController::class, 'edit'])->name('admin.user.edit');
         Route::post('/{id}', [\App\Http\Controllers\Admin\UserController::class, 'update'])->name('admin.user.update');
         Route::post('/{id}/photo', [\App\Http\Controllers\Admin\UserController::class, 'deleteImage'])->name('admin.user.photo');
+        Route::post('/{id}', [\App\Http\Controllers\Admin\UserController::class, 'destroy'])->name('admin.user.destroy');
     });
 });
 

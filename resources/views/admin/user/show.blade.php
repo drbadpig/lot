@@ -53,5 +53,8 @@
             {{ $user->created_at }}
         </div>
     </div>
-    <button class="btn btn-danger mt-3">Удалить</button>
+    <form method="post" action="{{ route('admin.user.destroy', [$user->id]) }}">
+        @csrf
+        <button type="submit" class="btn btn-danger mt-3">Удалить</button>
+    </form>
 </x-admin-layout>

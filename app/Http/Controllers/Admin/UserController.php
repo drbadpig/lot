@@ -95,11 +95,16 @@ class UserController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        //
+        $user = User::find($id);
+
+        Storage::delete(str_replace('storage/', '', $user->image));
+
+        $user->delete();
+
+        return redirect(route('admin.user.index'));
     }
 
     /**
