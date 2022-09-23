@@ -25,6 +25,8 @@ if (! function_exists('date_format_my')) {
             'Декабрь'
         ];
 
+        if ($date == null) return 0;
+
         // get month in russian
         $month = date('n')-1;
 
