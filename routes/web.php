@@ -70,6 +70,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
 
     Route::group(['prefix' => 'roles'], function() {
         Route::get('/', [\App\Http\Controllers\Admin\RoleController::class, 'index'])->name('admin.role.index');
+        Route::get('/create', [\App\Http\Controllers\Admin\RoleController::class, 'create'])->name('admin.role.create');
+        Route::post('/', [\App\Http\Controllers\Admin\RoleController::class, 'store'])->name('admin.role.store');
         Route::get('/{id}', [\App\Http\Controllers\Admin\RoleController::class, 'show'])->name('admin.role.show');
         Route::get('/{id}/edit', [\App\Http\Controllers\Admin\RoleController::class, 'edit'])->name('admin.role.edit');
         Route::post('/{id}', [\App\Http\Controllers\Admin\RoleController::class, 'update'])->name('admin.role.update');
