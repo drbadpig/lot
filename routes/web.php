@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\IndexController;
 use App\Http\Controllers\Admin\TalkController;
 use App\Http\Controllers\TestContorller;
 use App\Http\Controllers\User\SettingsController;
@@ -56,7 +57,7 @@ Route::group(['prefix' => 'settings', 'middleware' => 'auth'], function() {
 // admin
 
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
-    Route::get('/', [\App\Http\Controllers\Admin\IndexController::class, 'index'])->name('admin');
+    Route::get('/', [IndexController::class, 'index'])->name('admin');
 
     Route::group(['prefix' => 'users'], function() {
         Route::get('/', [\App\Http\Controllers\Admin\UserController::class, 'index'])->name('admin.user.index');
@@ -65,6 +66,11 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
         Route::post('/{id}', [\App\Http\Controllers\Admin\UserController::class, 'update'])->name('admin.user.update');
         Route::post('/{id}/photo', [\App\Http\Controllers\Admin\UserController::class, 'deleteImage'])->name('admin.user.photo');
         Route::post('/{id}', [\App\Http\Controllers\Admin\UserController::class, 'destroy'])->name('admin.user.destroy');
+    });
+
+    Route::group(['prefix' => 'roles'], function() {
+        Route::get('/', [\App\Http\Controllers\Admin\RoleController::class, 'index'])->name('admin.role.index');
+        Route::get('/{id}', [\App\Http\Controllers\Admin\RoleController::class, 'show'])->name('admin.role.show');
     });
 });
 
