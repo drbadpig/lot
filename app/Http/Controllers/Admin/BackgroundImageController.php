@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\BackgroundImage;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class BackgroundImageController extends Controller
 {
@@ -90,10 +93,22 @@ class BackgroundImageController extends Controller
      * Remove the specified resource from storage.
      *
      * @param int $id
-     * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        //
+        $background = BackgroundImage::find($id);
+
+        Storage::delete(str_replace('storage/', '', $background->path));
+
+        $users = User::all()->where('background_image_id', $id);
+
+        foreach ($users as $user) {
+            $user->background_image_id = 1;
+            $user->save();
+        }
+
+        $background->delete();
+
+        return redirect(route('admin.background.index'));
     }
 }
