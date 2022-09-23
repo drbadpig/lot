@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Role;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class RoleController extends Controller
@@ -57,7 +58,9 @@ class RoleController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('admin.role.edit', [
+            'role' => Role::find($id),
+        ]);
     }
 
     /**
@@ -68,7 +71,18 @@ class RoleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $role = Role::find($id);
+        if ($request->name != $role->name) {
+            $request->validate([
+                'name' => ['required', 'unique:roles', 'max:25', 'string'],
+            ]);
+
+            $role->name = $request->name;
+            $role->save();
+        }
+
+
+        return redirect(route('admin.role.show', [$role->id]));
     }
 
     /**
@@ -78,6 +92,17 @@ class RoleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $role = Role::find($id);
+
+        $users = User::all()->where('role_id', $id);
+
+        foreach ($users as $user) {
+            $user->role_id = 1;
+            $user->save();
+        }
+
+        $role->delete();
+
+        return redirect(route('admin.role.index'));
     }
 }

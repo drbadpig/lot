@@ -65,12 +65,15 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
         Route::get('/{id}/edit', [\App\Http\Controllers\Admin\UserController::class, 'edit'])->name('admin.user.edit');
         Route::post('/{id}', [\App\Http\Controllers\Admin\UserController::class, 'update'])->name('admin.user.update');
         Route::post('/{id}/photo', [\App\Http\Controllers\Admin\UserController::class, 'deleteImage'])->name('admin.user.photo');
-        Route::post('/{id}', [\App\Http\Controllers\Admin\UserController::class, 'destroy'])->name('admin.user.destroy');
+        Route::post('/{id}/delete', [\App\Http\Controllers\Admin\UserController::class, 'destroy'])->name('admin.user.destroy');
     });
 
     Route::group(['prefix' => 'roles'], function() {
         Route::get('/', [\App\Http\Controllers\Admin\RoleController::class, 'index'])->name('admin.role.index');
         Route::get('/{id}', [\App\Http\Controllers\Admin\RoleController::class, 'show'])->name('admin.role.show');
+        Route::get('/{id}/edit', [\App\Http\Controllers\Admin\RoleController::class, 'edit'])->name('admin.role.edit');
+        Route::post('/{id}', [\App\Http\Controllers\Admin\RoleController::class, 'update'])->name('admin.role.update');
+        Route::post('/{id}/delete', [\App\Http\Controllers\Admin\RoleController::class, 'destroy'])->name('admin.role.destroy');
     });
 });
 

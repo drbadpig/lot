@@ -1,5 +1,5 @@
-<x-admin-layout title="Пользователь">
-    <a href="#" class="btn btn-primary">Редактировать</a>
+<x-admin-layout title="Роль">
+    <a href="{{ route('admin.role.edit', [$role->id]) }}" class="btn btn-primary">Редактировать</a>
     <div class="row mt-3 text-lg">
         <div class="col-sm-3">
             <span>ID</span>
@@ -24,8 +24,12 @@
             {{ $role->created_at }}
         </div>
     </div>
-    <form>
-        @csrf
-        <button type="submit" class="btn btn-danger mt-3">Удалить</button>
-    </form>
+    @if($role->id == 1 || $role->id == 2)
+        <p class="mt-3 text-lg">Эту роль нельзя удалить</p>
+    @else
+        <form method="post" action="{{ route('admin.role.destroy', [$role->id]) }}">
+            @csrf
+            <button type="submit" class="btn btn-danger mt-3">Удалить</button>
+        </form>
+    @endif
 </x-admin-layout>
