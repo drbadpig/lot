@@ -16,6 +16,7 @@
                                 <thead>
                                 <tr>
                                     <th>ID</th>
+                                    <th>Имя</th>
                                     <th>Путь</th>
                                 </tr>
                                 </thead>
@@ -23,7 +24,8 @@
                                 @foreach($backgrounds as $background)
                                     <tr>
                                         <td>{{ $background->id }}</td>
-                                        <td><a href="{{ route('admin.background.show', [$background->id]) }}">{{ $background->path }}</a></td>
+                                        <td><a href="{{ route('admin.background.show', [$background->id]) }}">{{ $background->name }}</a></td>
+                                        <td>{{ $background->path }}</td>
                                     </tr>
                                 @endforeach
                                 </tbody>
