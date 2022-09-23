@@ -9,7 +9,7 @@
             <!-- /.card-header -->
             <div class="card-body">
                 <a href="{{ route('admin.role.create') }}" class="btn btn-success mb-3">Создать</a>
-                <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                <div class="dataTables_wrapper dt-bootstrap4">
                     <div class="row">
                         <div class="col-sm-12">
                             <table id="table" class="table table-bordered table-striped dataTable dtr-inline">
