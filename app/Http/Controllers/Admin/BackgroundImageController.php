@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\BackgroundImage;
 use Illuminate\Http\Request;
 
 class BackgroundImageController extends Controller
@@ -14,7 +15,9 @@ class BackgroundImageController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.background.index', [
+            'backgrounds' => BackgroundImage::all(),
+        ]);
     }
 
     /**
