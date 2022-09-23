@@ -1,4 +1,4 @@
-<x-admin-layout title="Редактировать">
+<x-admin-layout title="Добавить">
     <div class="card card-primary">
         <div class="card-header">
             <h3 class="card-title">Добавить роль</h3>
