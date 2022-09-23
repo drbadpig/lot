@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\TalkController;
 use App\Http\Controllers\TestContorller;
 use App\Http\Controllers\User\SettingsController;
 use App\Http\Controllers\User\UserController;
@@ -46,10 +47,24 @@ Route::post('/user/background', [UserController::class, 'updateBackground'])->na
 // settings
 
 Route::group(['prefix' => 'settings', 'middleware' => 'auth'], function() {
-    Route::get('/', [SettingsController::class, 'create'])->middleware('auth')->name('settings');
+    Route::get('/', [SettingsController::class, 'create'])->name('settings');
     Route::post('/image', [SettingsController::class, 'updateImage'])->name('settings.image');
     Route::post('/password', [SettingsController::class, 'updatePassword'])->name('settings.password');
     Route::post('/personal', [SettingsController::class, 'updatePersonal'])->name('settings.personal');
+});
+
+// admin
+
+Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
+    Route::get('/', [\App\Http\Controllers\Admin\IndexController::class, 'index'])->name('admin');
+
+    Route::group(['prefix' => 'users'], function() {
+        Route::get('/', [\App\Http\Controllers\Admin\UserController::class, 'index'])->name('admin.user.index');
+        Route::get('/{id}', [\App\Http\Controllers\Admin\UserController::class, 'show'])->name('admin.user.show');
+        Route::get('/{id}/edit', [\App\Http\Controllers\Admin\UserController::class, 'edit'])->name('admin.user.edit');
+        Route::post('/{id}', [\App\Http\Controllers\Admin\UserController::class, 'update'])->name('admin.user.update');
+        Route::post('/{id}/photo', [\App\Http\Controllers\Admin\UserController::class, 'deleteImage'])->name('admin.user.photo');
+    });
 });
 
 
