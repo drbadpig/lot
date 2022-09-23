@@ -15,7 +15,7 @@
                              class="flex flex-wrap items-center justify-between max-h-[400px] overflow-y-auto scrollbar-thin scrollbar-thumb-graphics scrollbar-track-gray-100/0 pb-12">
                             @foreach($backgrounds as $background)
                                 <img data-id="{{$background->id}}" class="w-[13.5rem] mb-5 mr-4 cursor-pointer"
-                                     alt="$background->path" src="{{ asset($background->path) }}">
+                                     alt="{{$background->name}}" src="{{ asset($background->path) }}">
                             @endforeach
                         </div>
                         <div
