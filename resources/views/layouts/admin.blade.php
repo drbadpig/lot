@@ -15,9 +15,11 @@
     <link rel="icon" href="{{ asset('lot logo.png') }}">
 
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.min.js"></script>
     <link rel="stylesheet" href="{{ asset('css/datatables/dataTables.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/datatables/responsive.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/datatables/buttons.bootstrap4.min.css') }}">
+
 
     <!-- Scripts -->
     <script src="https://kit.fontawesome.com/71c10ffd0e.js" crossorigin="anonymous"></script>
