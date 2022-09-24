@@ -92,10 +92,10 @@ class BackgroundImageController extends Controller
                 'name' => ['required', 'string', 'max:25', 'unique:background_images'],
             ]);
 
-            $new_path = str_replace('storage/', '', $background->path);
+            $new_path = remove_storage_from_path($background->path);
             $new_path = str_replace($background->name, $request->name, $new_path);
 
-            Storage::move(str_replace('storage/', '', $background->path), $new_path);
+            Storage::move(remove_storage_from_path($background->path), $new_path);
 
             $background->name = $request->name;
             $background->path = 'storage/' . $new_path;
@@ -107,7 +107,7 @@ class BackgroundImageController extends Controller
                 'image' => ['sometimes', 'image:jpg,jpeg,png'],
             ]);
 
-            Storage::delete(str_replace('storage/', '', $background->path));
+            Storage::delete(remove_storage_from_path($background->path));
 
             $image = $request->file('image');
             $path = $image->storeAs('backgrounds', $background->name . '.' . $image->getClientOriginalExtension());
@@ -125,7 +125,7 @@ class BackgroundImageController extends Controller
     {
         $background = BackgroundImage::find($id);
 
-        Storage::delete(str_replace('storage/', '', $background->path));
+        Storage::delete(remove_storage_from_path($background->path));
 
         $users = User::all()->where('background_image_id', $id);
 

@@ -79,7 +79,7 @@ class UserController extends Controller
     {
         $user = User::find($id);
 
-        Storage::delete(str_replace('storage/', '', $user->image));
+        Storage::delete(remove_storage_from_path($user->image));
 
         $user->delete();
 
@@ -95,7 +95,7 @@ class UserController extends Controller
     {
         $user = User::find($id);
 
-        Storage::delete(str_replace('storage/', '', $user->image));
+        Storage::delete(remove_storage_from_path($user->image));
 
         $user->image = 'images/no-image.jpg';
         $user->save();

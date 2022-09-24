@@ -60,7 +60,7 @@ class SettingsController extends Controller
             'image' => ['sometimes', 'image:jpg,jpeg,png']
         ]);
 
-        $storage_path = str_replace('storage/', '', Auth::user()->image);
+        $storage_path = remove_storage_from_path(Auth::user()->image);
         if (Storage::exists($storage_path)) {
             Storage::delete($storage_path);
         }
