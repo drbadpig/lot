@@ -15,8 +15,6 @@ class Talk extends Model
         'text',
         'user_id',
         'category_id',
-        'likes',
-        'dislikes',
     ];
 
     public function comments()

@@ -48,8 +48,6 @@ class IndexController extends Controller
             'text' => $request->editordata,
             'user_id' => Auth::id(),
             'category_id' => $request->category,
-            'likes' => 0,
-            'dislikes' => 0,
         ]);
 
         return redirect(route('talk.show', [$talk->id]));
