@@ -29,19 +29,9 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 require __DIR__.'/auth.php';
 
+// talk
 
-
-Route::get('/talk', function () {
-    return view('talk.show');
-});
-
-Route::get('/category/news', function () {
-    return view('talk.category');
-});
-
-Route::get('/category/news-lol', function () {
-    return view('talk.list');
-});
+Route::get('/talk/create', [\App\Http\Controllers\Talk\IndexController::class, 'create'])->middleware('auth')->name('talk.create');
 
 // category
 

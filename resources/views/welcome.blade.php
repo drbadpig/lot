@@ -39,11 +39,8 @@
             <div class="w-1/12">
             </div>
 
-            @php
-                $href = route('home');
-            @endphp
             <div class="w-3/12">
-                <x-add-talk :href="$href" :category="$category"/>
+                <x-add-talk/>
             </div>
         </div>
 
