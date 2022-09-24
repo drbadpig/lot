@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\BackgroundImage;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class BackgroundImageController extends Controller
@@ -70,11 +69,12 @@ class BackgroundImageController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param int $id
-     * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        //
+        return view('admin.background.edit', [
+            'background' => BackgroundImage::find($id),
+        ]);
     }
 
     /**
@@ -82,11 +82,38 @@ class BackgroundImageController extends Controller
      *
      * @param \Illuminate\Http\Request $request
      * @param int $id
-     * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        //
+        $background = BackgroundImage::find($id);
+
+        if ($request->name != $background->name) {
+            $request->validate([
+                'name' => ['required', 'string', 'max:25', 'unique:background_images'],
+            ]);
+
+            $new_path = str_replace('storage/', '', $background->path);
+            $new_path = str_replace($background->name, $request->name, $new_path);
+
+            Storage::move(str_replace('storage/', '', $background->path), $new_path);
+
+            $background->name = $request->name;
+            $background->path = 'storage/' . $new_path;
+            $background->save();
+        }
+
+        if ($request->image != null) {
+            $request->validate([
+                'image' => ['sometimes', 'image:jpg,jpeg,png'],
+            ]);
+
+            Storage::delete(str_replace('storage/', '', $background->path));
+
+            $image = $request->file('image');
+            $path = $image->storeAs('backgrounds', $background->name . '.' . $image->getClientOriginalExtension());
+        }
+
+        return redirect(route('admin.background.show', [$id]));
     }
 
     /**
