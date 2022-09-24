@@ -17,11 +17,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// test
+
+Route::get('/test', [TestContorller::class, 'index']);
+
+// home
+
 Route::get('/', [HomeController::class, 'index'])->name('home');
+
+// auth
 
 require __DIR__.'/auth.php';
 
-Route::get('/test', [TestContorller::class, 'index']);
+
 
 Route::get('/talk', function () {
     return view('talk.show');
