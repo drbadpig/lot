@@ -94,10 +94,13 @@ class CategoryFolderController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        //
+        $folder = CategoryFolder::find($id);
+
+        $folder->delete();
+
+        return redirect(route('admin.folder.index'));
     }
 }
