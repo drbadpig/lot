@@ -50,11 +50,12 @@ class CategoryFolderController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        //
+        return view('admin.category-folder.show', [
+            'folder' => CategoryFolder::find($id),
+        ]);
     }
 
     /**
