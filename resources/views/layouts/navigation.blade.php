@@ -18,7 +18,7 @@
                     <nav class="text-sm leading-6 font-semibold text-slate-700 dark:text-slate-200">
                         <ul class="flex space-x-8">
                             <li>
-                                <a class="hover:text-active" href="#">Добавить обсуждение</a>
+                                <a class="hover:text-active" href="{{ route('talk.create') }}">Добавить обсуждение</a>
                             </li>
                             <li>
                                 <a class="hover:text-active" href="#">Категории</a>
