@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\CategoryFolder;
 use Illuminate\Http\Request;
 
 class CategoryFolderController extends Controller
@@ -14,7 +15,9 @@ class CategoryFolderController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.category-folder.index', [
+            'folders' => CategoryFolder::all(),
+        ]);
     }
 
     /**
