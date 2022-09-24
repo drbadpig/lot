@@ -60,5 +60,6 @@
                 <x-add-talk :href="$href" :category="$category"/>
             </div>
         </div>
+    </div>
 
 </x-app-layout>
