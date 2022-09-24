@@ -30,7 +30,7 @@
 <div class="wrapper">
 
     <!-- Preloader -->
-    <x-admin-preloader/>
+{{--    <x-admin-preloader/>--}}
 
     <!-- Navbar -->
     <nav class="main-header navbar navbar-expand navbar-dark">
