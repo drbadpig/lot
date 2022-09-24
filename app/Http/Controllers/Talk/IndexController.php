@@ -35,7 +35,6 @@ class IndexController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
@@ -52,17 +51,20 @@ class IndexController extends Controller
             'likes' => 0,
             'dislikes' => 0,
         ]);
+
+        return redirect(route('talk.show', [$talk->id]));
     }
 
     /**
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        //
+        return view('talk.show', [
+            'talk' => Talk::find($id),
+        ]);
     }
 
     /**

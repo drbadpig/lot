@@ -18,7 +18,7 @@
                             class="flex relative justify-between items-center rounded-lg backdrop-blur border border-slate-900/10 dark:border-slate-50/[0.06] bg-black/20 supports-backdrop-blur:bg-white/95 p-3 mb-3">
                             <div class="w-full flex items-start justify-between">
                                 <div class="w-6/12">
-                                    <a href="/#" class="text-lg hover:text-active">{{ $talk->title }}</a>
+                                    <a href="{{ route('talk.show', [$talk->id]) }}" class="text-lg hover:text-active">{{ $talk->title }}</a>
                                 </div>
                                 <div class="flex flex-col items-center">
                                     <div class="flex">

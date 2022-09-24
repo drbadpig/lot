@@ -34,6 +34,7 @@ require __DIR__.'/auth.php';
 Route::group(['prefix' => 'talk', 'middleware' => 'auth'], function() {
     Route::get('/create', [\App\Http\Controllers\Talk\IndexController::class, 'create'])->name('talk.create');
     Route::post('/', [\App\Http\Controllers\Talk\IndexController::class, 'store'])->name('talk.store');
+    Route::get('/{id}', [\App\Http\Controllers\Talk\IndexController::class, 'show'])->name('talk.show');
 });
 
 // category
