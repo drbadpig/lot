@@ -13,12 +13,14 @@
         <!-- Icon -->
         <link rel="icon" href="{{ asset('lot logo.png') }}">
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-
         <!-- Scripts -->
         <!-- Css files wih Tailwind -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+        <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+        <script src="{{asset('js/summernote/summernote-ru-RU.js')}}"></script>
     </head>
     <body class="antialiased text-text bg-primary">
 
