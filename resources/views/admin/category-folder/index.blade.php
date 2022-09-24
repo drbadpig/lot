@@ -8,7 +8,7 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-                <a href="{{ route('admin.background.create') }}" class="btn btn-success mb-3">Создать</a>
+                <a href="{{ route('admin.folder.create') }}" class="btn btn-success mb-3">Создать</a>
                 <div class="dataTables_wrapper dt-bootstrap4">
                     <div class="row">
                         <div class="col-sm-12">
