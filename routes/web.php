@@ -35,8 +35,16 @@ Route::get('/category/news-lol', function () {
     return view('talk.list');
 });
 
-Route::get('/user/{id}', [UserController::class, 'show'])->name('user');
-Route::post('/user/background', [UserController::class, 'updateBackground'])->name('user.background');
+// category
+
+Route::get('/category/{id}', [\App\Http\Controllers\Category\IndexController::class, 'index'])->name('category');
+
+// user
+
+Route::group(['prefix' => 'user'], function() {
+    Route::get('/{id}', [UserController::class, 'show'])->name('user');
+    Route::post('/background', [UserController::class, 'updateBackground'])->middleware('auth')->name('user.background');
+});
 
 // settings
 
