@@ -87,6 +87,16 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
         Route::post('/{id}', [\App\Http\Controllers\Admin\BackgroundImageController::class, 'update'])->name('admin.background.update');
         Route::post('/{id}/delete', [\App\Http\Controllers\Admin\BackgroundImageController::class, 'destroy'])->name('admin.background.destroy');
     });
+
+    Route::group(['prefix' => 'category-folders'], function() {
+        Route::get('/', [\App\Http\Controllers\Admin\CategoryFolderController::class, 'index'])->name('admin.folder.index');
+        Route::get('/create', [\App\Http\Controllers\Admin\CategoryFolderController::class, 'create'])->name('admin.folder.create');
+        Route::post('/', [\App\Http\Controllers\Admin\CategoryFolderController::class, 'store'])->name('admin.folder.store');
+        Route::get('/{id}', [\App\Http\Controllers\Admin\CategoryFolderController::class, 'show'])->name('admin.folder.show');
+        Route::get('/{id}/edit', [\App\Http\Controllers\Admin\CategoryFolderController::class, 'edit'])->name('admin.folder.edit');
+        Route::post('/{id}', [\App\Http\Controllers\Admin\CategoryFolderController::class, 'update'])->name('admin.folder.update');
+        Route::post('/{id}/delete', [\App\Http\Controllers\Admin\CategoryFolderController::class, 'destroy'])->name('admin.folder.destroy');
+    });
 });
 
 
