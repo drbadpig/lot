@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\CategoryFolder;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -22,22 +23,34 @@ class CategoryController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        //
+        return view('admin.category.create', [
+            'folders' => CategoryFolder::all(),
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => ['required', 'string', 'max:25', 'unique:categories'],
+            'description' => ['required', 'max:60'],
+            'image' => ['required']
+        ]);
+
+        $category = Category::create([
+            'name' => $request->name,
+            'description' => $request->description,
+            'image' => $request->image,
+        ]);
+
+        return redirect(route('admin.category.index'));
     }
 
     /**

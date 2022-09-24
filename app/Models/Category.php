@@ -12,6 +12,12 @@ class Category extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $fillable = [
+        'name',
+        'description',
+        'image',
+    ];
+
     public function talks()
     {
         return $this->hasMany(Talk::class);
