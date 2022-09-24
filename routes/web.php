@@ -22,10 +22,6 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['verified'])->name('dashboard');
-
 require __DIR__.'/auth.php';
 
 Route::get('/test', [TestContorller::class, 'index']);
