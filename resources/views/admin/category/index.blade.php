@@ -18,6 +18,7 @@
                                     <th>ID</th>
                                     <th>Название</th>
                                     <th>Описание</th>
+                                    <th>Папка категории</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -26,6 +27,7 @@
                                         <td>{{ $category->id }}</td>
                                         <td><a href="{{ route('admin.category.show', [$category->id]) }}">{{ $category->name }}</a></td>
                                         <td>{{ $category->description }}</td>
+                                        <td>{{ $category->category_folder->name }}</td>
                                     </tr>
                                 @endforeach
                                 </tbody>
