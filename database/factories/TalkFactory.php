@@ -23,7 +23,7 @@ class TalkFactory extends Factory
         return [
             'text' => fake()->text(),
             'user_id' => fake()->numberBetween(User::first()->id, DB::table('users')->orderBy('id', 'desc')->first()->id),
-            'topic_id' => fake()->numberBetween(Topic::first()->id, DB::table('topics')->orderBy('id', 'desc')->first()->id),
+            'category_id' => fake()->numberBetween(Category::first()->id, DB::table('categories')->orderBy('id', 'desc')->first()->id),
             'likes' => fake()->numberBetween(0, 2000),
             'dislikes' => fake()->numberBetween(0, 2000),
         ];
