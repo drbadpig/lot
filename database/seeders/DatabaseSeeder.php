@@ -14,6 +14,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        // CategoryFolder
+        \App\Models\CategoryFolder::factory(4)->create();
         // BackgroundImage
         \App\Models\BackgroundImage::factory(1)->create();
         // roles
