@@ -18,10 +18,16 @@ class Category extends Model
         'image',
     ];
 
+    public function category_folder()
+    {
+        return $this->belongsTo(CategoryFolder::class);
+    }
+
     public function talks()
     {
         return $this->hasMany(Talk::class);
     }
+
 
     public function getComments()
     {
