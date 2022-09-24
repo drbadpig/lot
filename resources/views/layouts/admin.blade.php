@@ -84,6 +84,14 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a href="{{ route('admin.folder.index') }}" class="nav-link">
+                            <i class="nav-icon fas fa-table"></i>
+                            <p>
+                                Категории
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a href="{{ route('admin.background.index') }}" class="nav-link">
                             <i class="nav-icon fas fa-image"></i>
                             <p>

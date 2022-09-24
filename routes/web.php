@@ -90,6 +90,16 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
         Route::post('/{id}', [\App\Http\Controllers\Admin\CategoryFolderController::class, 'update'])->name('admin.folder.update');
         Route::post('/{id}/delete', [\App\Http\Controllers\Admin\CategoryFolderController::class, 'destroy'])->name('admin.folder.destroy');
     });
+
+    Route::group(['prefix' => 'categories'], function() {
+        Route::get('/', [\App\Http\Controllers\Admin\CategoryController::class, 'index'])->name('admin.category.index');
+        Route::get('/create', [\App\Http\Controllers\Admin\CategoryController::class, 'create'])->name('admin.category.create');
+        Route::post('/', [\App\Http\Controllers\Admin\CategoryController::class, 'store'])->name('admin.category.store');
+        Route::get('/{id}', [\App\Http\Controllers\Admin\CategoryController::class, 'show'])->name('admin.category.show');
+        Route::get('/{id}/edit', [\App\Http\Controllers\Admin\CategoryController::class, 'edit'])->name('admin.category.edit');
+        Route::post('/{id}', [\App\Http\Controllers\Admin\CategoryController::class, 'update'])->name('admin.category.update');
+        Route::post('/{id}/delete', [\App\Http\Controllers\Admin\CategoryController::class, 'destroy'])->name('admin.category.destroy');
+    });
 });
 
 
