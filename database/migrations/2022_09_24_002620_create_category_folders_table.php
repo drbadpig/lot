@@ -22,7 +22,7 @@ return new class extends Migration
 
         Schema::table('categories', function (Blueprint $table) {
             $table->unsignedBigInteger('category_folder_id')->after('image')->default(1);
-            $table->foreign('category_folder_id')->references('id')->on('categories')->onDelete('cascade');
+            $table->foreign('category_folder_id')->references('id')->on('category_folders')->onDelete('cascade');
         });
     }
 
