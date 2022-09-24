@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('talks', function (Blueprint $table) {
             $table->id();
+            $table->string('title');
             $table->text('text');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
