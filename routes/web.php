@@ -1,7 +1,6 @@
 <?php
 
-use App\Http\Controllers\Admin\IndexController;
-use App\Http\Controllers\Admin\TalkController;
+use App\Http\Controllers\IndexController;
 use App\Http\Controllers\TestContorller;
 use App\Http\Controllers\User\SettingsController;
 use App\Http\Controllers\User\UserController;
@@ -18,9 +17,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('home');
+Route::get('/', [IndexController::class, 'index'])->name('home');
 
 require __DIR__.'/auth.php';
 
@@ -53,7 +50,7 @@ Route::group(['prefix' => 'settings', 'middleware' => 'auth'], function() {
 // admin
 
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
-    Route::get('/', [IndexController::class, 'index'])->name('admin');
+    Route::get('/', [\App\Http\Controllers\Admin\IndexController::class, 'index'])->name('admin');
 
     Route::group(['prefix' => 'users'], function() {
         Route::get('/', [\App\Http\Controllers\Admin\UserController::class, 'index'])->name('admin.user.index');
