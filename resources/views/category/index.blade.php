@@ -35,11 +35,11 @@
                                     <div class="w-full flex items-center justify-end text-slate-400 mt-3">
                                         <div class="flex items-center mr-3">
                                             <span
-                                                class="text-center mr-2">{{ thousands_format(count($talk->comments)) }}</span>
+                                                class="mr-2">{{ thousands_format(count($talk->comments)) }}</span>
                                             <x-heroicon-o-chat-bubble-oval-left class="h-6 w-6"/>
                                         </div>
-                                        <div class="flex items-center mt-1">
-                                            <span class="text-center mr-2">7.5k</span>
+                                        <div class="flex items-center">
+                                            <span class="mr-2">7.5k</span>
                                             <x-heroicon-o-eye class="h-6 w-6"/>
                                         </div>
                                     </div>

@@ -18,7 +18,7 @@
                                     <a href="{{ route('category', [$category->id]) }}" class="uppercase text-lg hover:text-active">{{ $category->name }}</a>
                                     <p>{{ $category->description }}</p>
                                 </div>
-                                <div class="flex flex-col items-center justify-end text-slate-400">
+                                <div class="flex flex-col items-end justify-end text-slate-400">
                                     <div class="flex items-center" title="Посты">
                                         <span class="text-center mr-2">{{ thousands_format(count($category->talks)) }}</span>
                                         <x-heroicon-o-chat-bubble-bottom-center-text class="h-6 w-6"/>
