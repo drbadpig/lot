@@ -18,8 +18,18 @@
                                     <a href="{{ route('category', [$category->id]) }}" class="uppercase text-lg hover:text-active">{{ $category->name }}</a>
                                     <p>{{ $category->description }}</p>
                                 </div>
-                                <span class="text-center mx-3"><span>{{ thousands_format(count($category->talks)) }}</span> <br>постов</span>
-                                <span class="text-center mx-3"><span>{{ thousands_format(count($category->getComments())) }}</span> <br>комментариев</span>
+                                <div class="flex flex-col items-center justify-end text-slate-400">
+                                    <div class="flex items-center" title="Посты">
+                                        <span class="text-center mr-2">{{ thousands_format(count($category->talks)) }}</span>
+                                        <x-heroicon-o-chat-bubble-bottom-center-text class="h-6 w-6"/>
+
+                                    </div>
+                                    <div class="flex items-center mt-1" title="Комментарии">
+                                        <span
+                                            class="text-center mr-2">{{ thousands_format(count($category->getComments())) }}</span>
+                                        <x-heroicon-o-chat-bubble-oval-left class="h-6 w-6"/>
+                                    </div>
+                                </div>
                             </div>
                         @endforeach
                     </div>
