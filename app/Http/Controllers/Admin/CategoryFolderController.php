@@ -62,11 +62,12 @@ class CategoryFolderController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        //
+        return view('admin.category-folder.edit', [
+            'folder' => CategoryFolder::find($id),
+        ]);
     }
 
     /**
@@ -74,11 +75,19 @@ class CategoryFolderController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        //
+        $folder = CategoryFolder::find($id);
+
+        $request->validate([
+            'name' => ['required', 'string', 'max:25', 'unique:category_folders']
+        ]);
+
+        $folder->name = $request->name;
+        $folder->save();
+
+        return redirect(route('admin.folder.show', [$id]));
     }
 
     /**
