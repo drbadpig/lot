@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Storage;
+
 if (! function_exists('date_format_my')) {
     /**
      * MySql date format to Month, YEAR
@@ -60,5 +62,19 @@ if (! function_exists('thousands_format')) {
         }
 
         return $num;
+    }
+}
+
+if (! function_exists('remove_storage_from_path')) {
+    /**
+     *
+     * Removes 'storage/' from path
+     *
+     * @param $path
+     * @return string
+     */
+    function remove_storage_from_path($path): string
+    {
+        return str_replace('storage/', '', $path);
     }
 }
