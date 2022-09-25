@@ -31,9 +31,11 @@ require __DIR__.'/auth.php';
 
 // talk
 
-Route::group(['prefix' => 'talk', 'middleware' => 'auth'], function() {
-    Route::get('/create', [\App\Http\Controllers\Talk\IndexController::class, 'create'])->name('talk.create');
-    Route::post('/', [\App\Http\Controllers\Talk\IndexController::class, 'store'])->name('talk.store');
+Route::group(['prefix' => 'talk'], function() {
+    Route::group(['middleware' => 'auth'], function() {
+        Route::get('/create', [\App\Http\Controllers\Talk\IndexController::class, 'create'])->name('talk.create');
+        Route::post('/', [\App\Http\Controllers\Talk\IndexController::class, 'store'])->name('talk.store');
+    });
     Route::get('/{id}', [\App\Http\Controllers\Talk\IndexController::class, 'show'])->name('talk.show');
 });
 
