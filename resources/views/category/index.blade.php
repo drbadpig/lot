@@ -39,7 +39,7 @@
                                             <x-heroicon-o-chat-bubble-oval-left class="h-6 w-6"/>
                                         </div>
                                         <div class="flex items-center">
-                                            <span class="mr-2">7.5k</span>
+                                            <span class="mr-2">{{ thousands_format(count($talk->talk_views)) }}</span>
                                             <x-heroicon-o-eye class="h-6 w-6"/>
                                         </div>
                                     </div>

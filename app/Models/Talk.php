@@ -36,4 +36,9 @@ class Talk extends Model
     {
         return $this->hasMany(Like::class);
     }
+
+    public function talk_views()
+    {
+        return $this->hasMany(TalkView::class);
+    }
 }
