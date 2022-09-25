@@ -4,6 +4,12 @@
     <div class="container mx-auto p-8">
         <h1 class="hidden">leagueoftalks обсуждение {{ $talk->id }}{{ $talk->title }}</h1>
 
+        <div class="mb-6">
+            <a href="{{ route('home') }}" class="hover:text-active">Главная</a> > <a
+                href="{{ route('category', [$talk->category->id]) }}"
+                class="hover:text-active">{{ $talk->category->name }}</a> > <span>Обсуждение {{ $talk->user->username }}</span>
+        </div>
+
         <div class="w-full flex">
 
             <div class="w-8/12">
