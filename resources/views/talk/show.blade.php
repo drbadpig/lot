@@ -26,6 +26,7 @@
                             </div>
                         </div>
                         <div class="p-4">
+                            <h2 class="text-2xl uppercase mb-3">{{ $talk->title }}</h2>
                             {!! $talk->text !!}
                             {{--                            <h2 class="text-3xl uppercase mb-3">Волибира удаляют из игры :(</h2>--}}
                             {{--                            <p class="mb-3">"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium--}}
@@ -90,7 +91,7 @@
                                         class="font-medium text-sm">{{ date_format_my($comment->created_at->toDateString()) }}</span>
                                 </div>
                                 <div>
-                                    <p>ты тупой?</p>
+                                    <p>{{ $comment->text }}</p>
                                 </div>
                             </div>
                         </div>
@@ -132,6 +133,7 @@
                 lang: 'ru-RU',
                 dialogsInBody: true,
                 shortcuts: false,
+                focus: false,
                 toolbar: [
                     ['style', ['style']],
                     ['font', ['bold', 'italic', 'underline']],
@@ -141,8 +143,6 @@
                     ['view', ['help']]
                 ]
             });
-
-            $('#summernote').summernote('foreColor', 'white');
         });
     </script>
 </x-app-layout>
