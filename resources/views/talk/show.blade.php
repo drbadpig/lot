@@ -1,13 +1,18 @@
 <x-app-layout title="Обсуждение">
     <x-banner/>
 
+    @php
+        $like = \App\Models\Like::where('talk_id', $talk->id)->where('user_id', \Illuminate\Support\Facades\Auth::id())->first();
+    @endphp
+
     <div class="container mx-auto p-8">
         <h1 class="hidden">leagueoftalks обсуждение {{ $talk->id }}{{ $talk->title }}</h1>
 
         <div class="mb-6">
             <a href="{{ route('home') }}" class="hover:text-active">Главная</a> > <a
                 href="{{ route('category', [$talk->category->id]) }}"
-                class="hover:text-active">{{ $talk->category->name }}</a> > <span>Обсуждение {{ $talk->user->username }}</span>
+                class="hover:text-active">{{ $talk->category->name }}</a> >
+            <span>Обсуждение {{ $talk->user->username }}</span>
         </div>
 
         <div class="w-full flex">
@@ -34,47 +39,17 @@
                         <div class="p-4">
                             <h2 class="text-2xl uppercase mb-3">{{ $talk->title }}</h2>
                             {!! $talk->text !!}
-                            {{--                            <h2 class="text-3xl uppercase mb-3">Волибира удаляют из игры :(</h2>--}}
-                            {{--                            <p class="mb-3">"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium--}}
-                            {{--                                doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et--}}
-                            {{--                                quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia--}}
-                            {{--                                voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui--}}
-                            {{--                                ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia--}}
-                            {{--                                dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora--}}
-                            {{--                                incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima--}}
-                            {{--                                veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid--}}
-                            {{--                                ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate--}}
-                            {{--                                velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo--}}
-                            {{--                                voluptas nulla pariatur?"</p>--}}
-                            {{--                            <p class="mb-3">"But I must explain to you how all this mistaken idea of denouncing pleasure--}}
-                            {{--                                and praising pain was born and I will give you a complete account of the system, and--}}
-                            {{--                                expound the actual teachings of the great explorer of the truth, the master-builder of--}}
-                            {{--                                human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is--}}
-                            {{--                                pleasure, but because those who do not know how to pursue pleasure rationally encounter--}}
-                            {{--                                consequences that are extremely painful. Nor again is there anyone who loves or pursues--}}
-                            {{--                                or desires to obtain pain of itself, because it is pain, but because occasionally--}}
-                            {{--                                circumstances occur in which toil and pain can procure him some great pleasure. To take--}}
-                            {{--                                a trivial example, which of us ever undertakes laborious physical exercise, except to--}}
-                            {{--                                obtain some advantage from it? But who has any right to find fault with a man who--}}
-                            {{--                                chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain--}}
-                            {{--                                that produces no resultant pleasure?"</p>--}}
-                            {{--                            <img class="mb-3" src="{{ asset('backgrounds/tf-graves.jpg') }}" alt="gay">--}}
-                            {{--                            <p class="mb-3">--}}
-                            {{--                                "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium--}}
-                            {{--                                voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint--}}
-                            {{--                                occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt--}}
-                            {{--                                mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et--}}
-                            {{--                                expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque--}}
-                            {{--                                nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda--}}
-                            {{--                                est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut--}}
-                            {{--                                rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non--}}
-                            {{--                                recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis--}}
-                            {{--                                voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat."--}}
-                            {{--                            </p>--}}
                             <div class="flex justify-between mt-4">
-                                <div class="flex items-center">
-                                    <x-heroicon-o-heart class="h-6 w-6 text-red-600 mr-2"/>
-                                    <span class="text-slate-400">210</span>
+
+                                <div class="flex items-center select-none">
+                                    <x-heroicon-o-heart id="like-btn"
+                                                        style="{{ $like != null ? 'display: none;' : '' }}"
+                                                        class="h-6 w-6 text-red-600 mr-2 transition cursor-pointer"/>
+                                    <x-heroicon-o-heart id="dislike-btn"
+                                                        style="{{ $like == null ? 'display: none;' : '' }}"
+                                                        class="h-6 w-6 text-red-600 mr-2 transition fill-red-600 cursor-pointer"/>
+                                    <span id="likes" {{ $like != null ? 'data-like_id='.$like->id.'' : '' }}
+                                          class="text-slate-400">{{ thousands_format(count($talk->likes)) }}</span>
                                 </div>
                                 <a href="#comment" class="flex items-center text-slate-400">
                                     <x-heroicon-o-arrow-uturn-left class="h-6 w-6 mr-2"/>
@@ -148,6 +123,50 @@
                     ['insert', ['link']],
                     ['view', ['help']]
                 ]
+            });
+        });
+
+        $('#like-btn').on('click', function () {
+            let talk_id = {{ $talk->id }};
+            let user_id = {{ \Illuminate\Support\Facades\Auth::id() }};
+
+            $.ajax({
+                url: '{{ route('talk.like') }}',
+                type: "POST",
+                data: {talk_id: talk_id, user_id: user_id},
+                headers: {
+                    'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function (data) {
+                    $('#likes').text(data['likes']).data('like_id', data['like_id']);
+                    $('#like-btn').hide();
+                    $('#dislike-btn').show();
+                },
+                error: function (msg) {
+                    alert('Ошибка');
+                }
+            });
+        });
+
+        $('#dislike-btn').on('click', function () {
+            console.log($('#likes').data('like_id'));
+            let like_id = $('#likes').data('like_id');
+
+            $.ajax({
+                url: '{{ route('talk.dislike') }}',
+                type: "POST",
+                data: {like_id: like_id},
+                headers: {
+                    'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function (data) {
+                    $('#likes').text($('#likes').text() - 1);
+                    $('#like-btn').show();
+                    $('#dislike-btn').hide();
+                },
+                error: function (msg) {
+                    alert('Ошибка');
+                }
             });
         });
     </script>

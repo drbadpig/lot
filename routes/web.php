@@ -35,6 +35,8 @@ Route::group(['prefix' => 'talk'], function() {
     Route::group(['middleware' => 'auth'], function() {
         Route::get('/create', [\App\Http\Controllers\Talk\IndexController::class, 'create'])->name('talk.create');
         Route::post('/', [\App\Http\Controllers\Talk\IndexController::class, 'store'])->name('talk.store');
+        Route::post('/like', [\App\Http\Controllers\Talk\TalkLikeController::class, 'store'])->name('talk.like');
+        Route::post('/dislike', [\App\Http\Controllers\Talk\TalkLikeController::class, 'destroy'])->name('talk.dislike');
     });
     Route::get('/{id}', [\App\Http\Controllers\Talk\IndexController::class, 'show'])->name('talk.show');
 });
