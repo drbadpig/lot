@@ -110,16 +110,6 @@
                             class="text-active">{{ thousands_format(count($talk->comments)) }}</span>
                     </p>
                 </div>
-                {{--                <div--}}
-                {{--                    class="relative justify-between items-center rounded-lg backdrop-blur border border-slate-900/10 dark:border-slate-50/[0.06] bg-black/20 supports-backdrop-blur:bg-white/95 p-3 mb-3">--}}
-                {{--                    <p>Просмотры: <span class="text-active">{{ thousands_format(count($talk->talk_views)) }}</span>--}}
-                {{--                    </p>--}}
-                {{--                </div>--}}
-                {{--                <div--}}
-                {{--                    class="relative justify-between items-center rounded-lg backdrop-blur border border-slate-900/10 dark:border-slate-50/[0.06] bg-black/20 supports-backdrop-blur:bg-white/95 p-3 mb-3">--}}
-                {{--                    <p>Комментарии: <span class="text-active">{{ thousands_format(count($talk->comments)) }}</span>--}}
-                {{--                    </p>--}}
-                {{--                </div>--}}
                 <x-add-talk/>
             </div>
         </div>
