@@ -14,6 +14,10 @@ class TestContorller extends Controller
         // get user created at date
         $date = $user->created_at->toDateString();
 
+        dd(strtotime(now()->toDateString()) == strtotime($date));
+        dd(date("G:H", strtotime($date)));
+
+        return $months[$month].date(", Y", strtotime($date));
 
         // get user role
         $role = $user->role;

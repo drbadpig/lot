@@ -37,6 +37,44 @@ if (! function_exists('date_format_my')) {
     }
 }
 
+if (! function_exists('date_format_tdmy')) {
+    /**
+     * MySql date format to Month, YEAR
+     *
+     * @param $date
+     * @return string
+     */
+    function date_format_tdmy($date): string
+    {
+        // months
+        $months = [
+            'Янв',
+            'Фев',
+            'Мар',
+            'Апр',
+            'Май',
+            'Июн',
+            'Июл',
+            'Авг',
+            'Сен',
+            'Окт',
+            'Ноя',
+            'Дек'
+        ];
+
+        if ($date == null) return 0;
+
+        // get month in russian
+        $month = date('n')-1;
+
+        if (strtotime(now()->toDateString()) == strtotime($date->toDateString())) {
+            return date("G:H", strtotime($date));
+        }
+
+        return date("G:H, ".$months[$month]. " j, Y", strtotime($date->toDatetimeString()));
+    }
+}
+
 if (! function_exists('thousands_format')) {
     /**
      * Number formatter (1000 - 1k etc)

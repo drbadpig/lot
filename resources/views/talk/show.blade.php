@@ -33,7 +33,7 @@
                                     </a>
                                 </div>
                                 <span
-                                    class="font-medium text-sm">{{ date_format_my($talk->created_at->toDateString()) }}</span>
+                                    class="font-medium text-sm">{{ date_format_tdmy($talk->created_at) }}</span>
                             </div>
                         </div>
                         <div class="p-4">
@@ -69,7 +69,7 @@
                                         {{ $comment->user->username }}
                                     </a>
                                     <span
-                                        class="font-medium text-sm">{{ date_format_my($comment->created_at->toDateString()) }}</span>
+                                        class="font-medium text-sm text-slate-400">{{ date_format_tdmy($comment->created_at) }}</span>
                                 </div>
                                 <div>
                                     <p>{{ $comment->text }}</p>
