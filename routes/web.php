@@ -38,6 +38,8 @@ Route::group(['prefix' => 'talk'], function() {
 
         Route::post('/like', [\App\Http\Controllers\Talk\TalkLikeController::class, 'store'])->name('talk.like');
         Route::post('/dislike', [\App\Http\Controllers\Talk\TalkLikeController::class, 'destroy'])->name('talk.dislike');
+
+        Route::post('/{id}/comment', [\App\Http\Controllers\Comment\IndexController::class, 'store'])->name('talk.comment');
     });
     Route::get('/{id}', [\App\Http\Controllers\Talk\IndexController::class, 'show'])->name('talk.show');
 });

@@ -59,31 +59,35 @@
                         </div>
                     </div>
                     <h2 class="text-2xl uppercase mb-3">Комментарии</h2>
-                    @foreach($talk->comments as $comment)
-                        <div
-                            class="flex rounded-lg backdrop-blur border border-slate-900/10 dark:border-slate-50/[0.06] bg-black/20 supports-backdrop-blur:bg-white/95 p-3 mb-3">
-                            <img src="{{ asset($comment->user->image) }}" class="h-16 w-16 mr-4" alt="sss">
-                            <div class="flex flex-col flex-auto">
-                                <div class="flex justify-between border-b border-slate-50/[0.06] mb-2">
-                                    <a class="text-lg" href="{{ route('user', [$comment->user->id]) }}">
-                                        {{ $comment->user->username }}
-                                    </a>
-                                    <span
-                                        class="font-medium text-sm text-slate-400">{{ date_format_tdmy($comment->created_at) }}</span>
-                                </div>
-                                <div>
-                                    <p>{{ $comment->text }}</p>
+                    <div id="comments">
+                        @foreach($talk->comments as $comment)
+                            <div
+                                class="flex rounded-lg backdrop-blur border border-slate-900/10 dark:border-slate-50/[0.06] bg-black/20 supports-backdrop-blur:bg-white/95 p-3 mb-3">
+                                <img src="{{ asset($comment->user->image) }}" class="h-16 w-16 mr-4" alt="sss">
+                                <div class="flex flex-col flex-auto">
+                                    <div class="flex justify-between border-b border-slate-50/[0.06] mb-2">
+                                        <a class="text-lg" href="{{ route('user', [$comment->user->id]) }}">
+                                            {{ $comment->user->username }}
+                                        </a>
+                                        <span
+                                            class="font-medium text-sm text-slate-400">{{ date_format_tdmy($comment->created_at) }}</span>
+                                    </div>
+                                    <div>
+                                        <p>{!! $comment->text !!}</p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    @endforeach
+                        @endforeach
+                    </div>
                     <h2 class="text-xl uppercase mb-3">Добавить комментарий</h2>
                     <div id="comment"
-                         class="flex rounded-lg backdrop-blur border border-slate-900/10 dark:border-slate-50/[0.06] bg-black/20 supports-backdrop-blur:bg-white/95 p-3 mb-3">             @if(\Illuminate\Support\Facades\Auth::check())
-                            <form class="w-full" method="post" action="{{ route('talk.store') }}">
+                         class="flex flex-col rounded-lg backdrop-blur border border-slate-900/10 dark:border-slate-50/[0.06] bg-black/20 supports-backdrop-blur:bg-white/95 p-3 mb-3">
+                        <x-auth-validation-errors/>
+                        @if(\Illuminate\Support\Facades\Auth::check())
+                            <form class="w-full" method="post" action="{{ route('talk.comment', $talk->id) }}">
                                 @csrf
                                 <textarea id="summernote" name="editordata"></textarea>
-                                <x-button class="mt-3 w-full justify-center">
+                                <x-button id="comment-btn" class="mt-3 w-full justify-center">
                                     Ответить
                                 </x-button>
                             </form>
@@ -176,7 +180,6 @@
             });
 
             $('#dislike-btn').on('click', function () {
-                console.log($('#likes').data('like_id'));
                 let like_id = $('#likes').data('like_id');
 
                 $.ajax({
@@ -196,6 +199,28 @@
                     }
                 });
             });
+
+            {{--$('#comment-btn').on('click', function () {--}}
+            {{--    let text = $('#summernote').summernote('code');--}}
+            {{--    let talk_id = {{ $talk->id }};--}}
+
+            {{--    $.ajax({--}}
+            {{--        url: '{{ route('talk.comment') }}',--}}
+            {{--        type: 'POST',--}}
+            {{--        data: {text: text, talk_id: talk_id},--}}
+            {{--        headers: {--}}
+            {{--            'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')--}}
+            {{--        },--}}
+            {{--        success: function (data) {--}}
+            {{--            // $('#comments:last').after(--}}
+            {{--            --}}{{--    '<div class="flex rounded-lg backdrop-blur border border-slate-900/10 dark:border-slate-50/[0.06] bg-black/20 supports-backdrop-blur:bg-white/95 p-3 mb-3"> <img src="{{ asset(\Illuminate\Support\Facades\Auth::user()->image) }}" class="h-16 w-16 mr-4" alt="sss"> <div class="flex flex-col flex-auto"> <div class="flex justify-between border-b border-slate-50/[0.06] mb-2"> <a class="text-lg" href="{{ route('user', [\Illuminate\Support\Facades\Auth::user()->id]) }}">{{ \Illuminate\Support\Facades\Auth::user()->username }}</a> <span class="font-medium text-sm text-slate-400">' + data['date'] + '</span> </div> <div> <p>' + data['text'] + '</p> </div> </div> </div>');--}}
+            {{--            alert('УРРРР')--}}
+            {{--        },--}}
+            {{--        error: function (msg) {--}}
+            {{--            alert('Ошибка');--}}
+            {{--        }--}}
+            {{--    });--}}
+            {{--});--}}
         });
     </script>
 </x-app-layout>
