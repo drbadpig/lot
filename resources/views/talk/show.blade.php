@@ -49,7 +49,7 @@
                                                         style="{{ $like == null ? 'display: none;' : '' }}"
                                                         class="h-6 w-6 text-red-600 mr-2 transition fill-red-600 cursor-pointer"/>
                                     <span id="likes" {{ $like != null ? 'data-like_id='.$like->id.'' : '' }}
-                                          class="text-slate-400">{{ thousands_format(count($talk->likes)) }}</span>
+                                    class="text-slate-400">{{ thousands_format(count($talk->likes)) }}</span>
                                 </div>
                                 <a href="#comment" class="flex items-center text-slate-400">
                                     <x-heroicon-o-arrow-uturn-left class="h-6 w-6 mr-2"/>
@@ -99,6 +99,25 @@
             </div>
 
             <div class="w-3/12">
+                <div
+                    class="relative justify-between items-center rounded-lg backdrop-blur border border-slate-900/10 dark:border-slate-50/[0.06] bg-black/20 supports-backdrop-blur:bg-white/95 p-3 mb-3">
+                    <p>Категория: <a href="{{ route('category', $talk->category->id) }}"
+                                     class="text-active hover:text-activeLight">{{ $talk->category->name }}</a></p>
+                    <p class="mt-3">Просмотры: <span class="text-active">{{ thousands_format(count($talk->talk_views)) }}</span>
+                    </p>
+                    <p class="mt-3">Комментарии: <span class="text-active">{{ thousands_format(count($talk->comments)) }}</span>
+                    </p>
+                </div>
+{{--                <div--}}
+{{--                    class="relative justify-between items-center rounded-lg backdrop-blur border border-slate-900/10 dark:border-slate-50/[0.06] bg-black/20 supports-backdrop-blur:bg-white/95 p-3 mb-3">--}}
+{{--                    <p>Просмотры: <span class="text-active">{{ thousands_format(count($talk->talk_views)) }}</span>--}}
+{{--                    </p>--}}
+{{--                </div>--}}
+{{--                <div--}}
+{{--                    class="relative justify-between items-center rounded-lg backdrop-blur border border-slate-900/10 dark:border-slate-50/[0.06] bg-black/20 supports-backdrop-blur:bg-white/95 p-3 mb-3">--}}
+{{--                    <p>Комментарии: <span class="text-active">{{ thousands_format(count($talk->comments)) }}</span>--}}
+{{--                    </p>--}}
+{{--                </div>--}}
                 <x-add-talk/>
             </div>
         </div>
