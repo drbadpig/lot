@@ -85,6 +85,12 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
         Route::post('/{id}/delete', [\App\Http\Controllers\Admin\RoleController::class, 'destroy'])->name('admin.role.destroy');
     });
 
+    Route::group(['prefix' => 'talks'], function() {
+        Route::get('/', [\App\Http\Controllers\Admin\TalkController::class, 'index'])->name('admin.talk.index');
+        Route::get('/{id}', [\App\Http\Controllers\Admin\TalkController::class, 'show'])->name('admin.talk.show');
+        Route::post('/{id}/delete', [\App\Http\Controllers\Admin\TalkController::class, 'destroy'])->name('admin.talk.destroy');
+    });
+
     Route::group(['prefix' => 'backgrounds'], function() {
         Route::get('/', [\App\Http\Controllers\Admin\BackgroundImageController::class, 'index'])->name('admin.background.index');
         Route::get('/create', [\App\Http\Controllers\Admin\BackgroundImageController::class, 'create'])->name('admin.background.create');
