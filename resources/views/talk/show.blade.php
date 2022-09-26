@@ -103,21 +103,23 @@
                     class="relative justify-between items-center rounded-lg backdrop-blur border border-slate-900/10 dark:border-slate-50/[0.06] bg-black/20 supports-backdrop-blur:bg-white/95 p-3 mb-3">
                     <p>Категория: <a href="{{ route('category', $talk->category->id) }}"
                                      class="text-active hover:text-activeLight">{{ $talk->category->name }}</a></p>
-                    <p class="mt-3">Просмотры: <span class="text-active">{{ thousands_format(count($talk->talk_views)) }}</span>
+                    <p class="mt-3">Просмотры: <span
+                            class="text-active">{{ thousands_format(count($talk->talk_views)) }}</span>
                     </p>
-                    <p class="mt-3">Комментарии: <span class="text-active">{{ thousands_format(count($talk->comments)) }}</span>
+                    <p class="mt-3">Комментарии: <span
+                            class="text-active">{{ thousands_format(count($talk->comments)) }}</span>
                     </p>
                 </div>
-{{--                <div--}}
-{{--                    class="relative justify-between items-center rounded-lg backdrop-blur border border-slate-900/10 dark:border-slate-50/[0.06] bg-black/20 supports-backdrop-blur:bg-white/95 p-3 mb-3">--}}
-{{--                    <p>Просмотры: <span class="text-active">{{ thousands_format(count($talk->talk_views)) }}</span>--}}
-{{--                    </p>--}}
-{{--                </div>--}}
-{{--                <div--}}
-{{--                    class="relative justify-between items-center rounded-lg backdrop-blur border border-slate-900/10 dark:border-slate-50/[0.06] bg-black/20 supports-backdrop-blur:bg-white/95 p-3 mb-3">--}}
-{{--                    <p>Комментарии: <span class="text-active">{{ thousands_format(count($talk->comments)) }}</span>--}}
-{{--                    </p>--}}
-{{--                </div>--}}
+                {{--                <div--}}
+                {{--                    class="relative justify-between items-center rounded-lg backdrop-blur border border-slate-900/10 dark:border-slate-50/[0.06] bg-black/20 supports-backdrop-blur:bg-white/95 p-3 mb-3">--}}
+                {{--                    <p>Просмотры: <span class="text-active">{{ thousands_format(count($talk->talk_views)) }}</span>--}}
+                {{--                    </p>--}}
+                {{--                </div>--}}
+                {{--                <div--}}
+                {{--                    class="relative justify-between items-center rounded-lg backdrop-blur border border-slate-900/10 dark:border-slate-50/[0.06] bg-black/20 supports-backdrop-blur:bg-white/95 p-3 mb-3">--}}
+                {{--                    <p>Комментарии: <span class="text-active">{{ thousands_format(count($talk->comments)) }}</span>--}}
+                {{--                    </p>--}}
+                {{--                </div>--}}
                 <x-add-talk/>
             </div>
         </div>
@@ -135,57 +137,74 @@
                 shortcuts: false,
                 focus: false,
                 toolbar: [
-                    ['style', ['style']],
-                    ['font', ['bold', 'italic', 'underline']],
-                    ['para', ['ul', 'ol', 'paragraph']],
-                    ['table', ['table']],
+                    ['font', ['bold', 'italic', 'underline', 'clear']],
+                    ['para', ['paragraph']],
+                    ['fontsize', ['fontsize']],
                     ['insert', ['link']],
-                    ['view', ['help']]
                 ]
             });
-        });
 
-        $('#like-btn').on('click', function () {
-            let talk_id = {{ $talk->id }};
-            let user_id = {{ \Illuminate\Support\Facades\Auth::id() }};
+            $('.note-editable').addClass('text-text bg-primaryDarker border-none');
+            $('.note-toolbar').addClass('bg-primaryDarker border-b border-slate-50/[0.06]');
+            $('.note-btn').addClass('bg-graphics border-slate-50/[0.06]');
+            $('.note-btn i').addClass('text-text');
+            $('.note-btn span').addClass('text-text');
+            $('.note-editor.note-frame').addClass('border-slate-50/[0.06]');
+            $('.note-modal-content').addClass('bg-primary');
+            $('.note-modal-header').addClass('border-none text-text');
+            $('.note-modal-title').addClass('text-text');
+            $('.note-modal-body').addClass('overflow-auto scrollbar-thin scrollbar-thumb-graphics scrollbar-track-gray-100/0');
+            $('.note-form-label').addClass('text-text');
+            $('.note-icon-close').addClass('text-text');
+            $('.note-input').addClass('border-gray-300 focus:ring focus:ring-active focus:ring-opacity-100 rounded-md shadow-sm text-slate-700');
+            $('.checkbox').addClass('block mt-4');
+            $('.checkbox label').addClass('inline-flex items-center');
+            $('.checkbox label input').addClass('rounded border-none text-graphics shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 mr-2');
+            $('.note-modal-footer').addClass('h-auto pt-0 flex justify-end');
+            $('.note-modal-footer .note-btn').addClass('inline-flex items-center px-4 py-2 bg-graphics border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-graphicsLight active:bg-graphics focus:outline-none focus:border-gray-900 focus:shadow-outline-gray transition ease-in-out duration-150 float-none');
 
-            $.ajax({
-                url: '{{ route('talk.like') }}',
-                type: "POST",
-                data: {talk_id: talk_id, user_id: user_id},
-                headers: {
-                    'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
-                },
-                success: function (data) {
-                    $('#likes').text(data['likes']).data('like_id', data['like_id']);
-                    $('#like-btn').hide();
-                    $('#dislike-btn').show();
-                },
-                error: function (msg) {
-                    alert('Ошибка');
-                }
+            $('#like-btn').on('click', function () {
+                let talk_id = {{ $talk->id }};
+                let user_id = {{ \Illuminate\Support\Facades\Auth::id() }};
+
+                $.ajax({
+                    url: '{{ route('talk.like') }}',
+                    type: "POST",
+                    data: {talk_id: talk_id, user_id: user_id},
+                    headers: {
+                        'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function (data) {
+                        $('#likes').text(data['likes']).data('like_id', data['like_id']);
+                        $('#like-btn').hide();
+                        $('#dislike-btn').show();
+                    },
+                    error: function (msg) {
+                        alert('Ошибка');
+                    }
+                });
             });
-        });
 
-        $('#dislike-btn').on('click', function () {
-            console.log($('#likes').data('like_id'));
-            let like_id = $('#likes').data('like_id');
+            $('#dislike-btn').on('click', function () {
+                console.log($('#likes').data('like_id'));
+                let like_id = $('#likes').data('like_id');
 
-            $.ajax({
-                url: '{{ route('talk.dislike') }}',
-                type: "POST",
-                data: {like_id: like_id},
-                headers: {
-                    'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
-                },
-                success: function (data) {
-                    $('#likes').text($('#likes').text() - 1);
-                    $('#like-btn').show();
-                    $('#dislike-btn').hide();
-                },
-                error: function (msg) {
-                    alert('Ошибка');
-                }
+                $.ajax({
+                    url: '{{ route('talk.dislike') }}',
+                    type: "POST",
+                    data: {like_id: like_id},
+                    headers: {
+                        'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function (data) {
+                        $('#likes').text($('#likes').text() - 1);
+                        $('#like-btn').show();
+                        $('#dislike-btn').hide();
+                    },
+                    error: function (msg) {
+                        alert('Ошибка');
+                    }
+                });
             });
         });
     </script>

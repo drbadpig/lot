@@ -45,16 +45,31 @@
                 dialogsInBody: true,
                 shortcuts: false,
                 toolbar: [
-                    ['style', ['style']],
                     ['font', ['bold', 'italic', 'underline', 'clear']],
-                    ['para', ['ul', 'ol', 'paragraph']],
-                    ['table', ['table']],
+                    ['para', ['paragraph']],
+                    ['fontsize', ['fontsize']],
                     ['insert', ['link', 'picture', 'video']],
-                    ['view', ['codeview', 'help']]
                 ]
             });
 
-            $('#summernote').summernote('foreColor', 'white');
+            $('.note-editable').addClass('text-text bg-primaryDarker border-none');
+            $('.note-toolbar').addClass('bg-primaryDarker border-b border-slate-50/[0.06]');
+            $('.note-btn').addClass('bg-graphics border-slate-50/[0.06]');
+            $('.note-btn i').addClass('text-text');
+            $('.note-btn span').addClass('text-text');
+            $('.note-editor.note-frame').addClass('border-slate-50/[0.06]');
+            $('.note-modal-content').addClass('bg-primary');
+            $('.note-modal-header').addClass('border-none text-text');
+            $('.note-modal-title').addClass('text-text');
+            $('.note-modal-body').addClass('overflow-auto scrollbar-thin scrollbar-thumb-graphics scrollbar-track-gray-100/0');
+            $('.note-form-label').addClass('text-text');
+            $('.note-icon-close').addClass('text-text');
+            $('.note-input').addClass('border-gray-300 focus:ring focus:ring-active focus:ring-opacity-100 rounded-md shadow-sm text-slate-700');
+            $('.checkbox').addClass('block mt-4');
+            $('.checkbox label').addClass('inline-flex items-center');
+            $('.checkbox label input').addClass('rounded border-none text-graphics shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 mr-2');
+            $('.note-modal-footer').addClass('h-auto pt-0 flex justify-end');
+            $('.note-modal-footer .note-btn').addClass('inline-flex items-center px-4 py-2 bg-graphics border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-graphicsLight active:bg-graphics focus:outline-none focus:border-gray-900 focus:shadow-outline-gray transition ease-in-out duration-150 float-none');
         });
     </script>
 </x-app-layout>
