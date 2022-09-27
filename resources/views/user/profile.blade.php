@@ -147,41 +147,23 @@
         })
 
         $('#btn-accept').on('click', function () {
-
             let id = selectedImage.dataset.id;
             console.log(id);
 
             $.ajax({
-
                 url: '{!! route('user.background') !!}',
-
                 type: "POST",
-
                 data: {id: id},
-
                 headers: {
-
                     'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
-
                 },
-
                 success: function (data) {
-
                     modal.style.display = "none";
-
                     $('#bg-image').css('background-image', 'url("' + data['path'] + '")');
                 },
-
                 error: function (msg) {
-
-                    alert('Ошибка');
-
                 }
-
             });
-
         });
-
-
     </script>
 </x-app-layout>

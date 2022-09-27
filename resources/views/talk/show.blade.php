@@ -200,7 +200,7 @@
                         $('#dislike-btn').show();
                     },
                     error: function (msg) {
-                        alert('Ошибка');
+
                     }
                 });
             });
@@ -221,32 +221,10 @@
                         $('#dislike-btn').hide();
                     },
                     error: function (msg) {
-                        alert('Ошибка');
+
                     }
                 });
             });
-
-            {{--$('#comment-btn').on('click', function () {--}}
-            {{--    let text = $('#summernote').summernote('code');--}}
-            {{--    let talk_id = {{ $talk->id }};--}}
-
-            {{--    $.ajax({--}}
-            {{--        url: '{{ route('talk.comment') }}',--}}
-            {{--        type: 'POST',--}}
-            {{--        data: {text: text, talk_id: talk_id},--}}
-            {{--        headers: {--}}
-            {{--            'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')--}}
-            {{--        },--}}
-            {{--        success: function (data) {--}}
-            {{--            // $('#comments:last').after(--}}
-            {{--            --}}{{--    '<div class="flex rounded-lg backdrop-blur border border-slate-900/10 dark:border-slate-50/[0.06] bg-black/20 supports-backdrop-blur:bg-white/95 p-3 mb-3"> <img src="{{ asset(\Illuminate\Support\Facades\Auth::user()->image) }}" class="h-16 w-16 mr-4" alt="sss"> <div class="flex flex-col flex-auto"> <div class="flex justify-between border-b border-slate-50/[0.06] mb-2"> <a class="text-lg" href="{{ route('user', [\Illuminate\Support\Facades\Auth::user()->id]) }}">{{ \Illuminate\Support\Facades\Auth::user()->username }}</a> <span class="font-medium text-sm text-slate-400">' + data['date'] + '</span> </div> <div> <p>' + data['text'] + '</p> </div> </div> </div>');--}}
-            {{--            alert('УРРРР')--}}
-            {{--        },--}}
-            {{--        error: function (msg) {--}}
-            {{--            alert('Ошибка');--}}
-            {{--        }--}}
-            {{--    });--}}
-            {{--});--}}
         });
     </script>
 </x-app-layout>
