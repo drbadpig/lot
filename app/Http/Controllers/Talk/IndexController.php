@@ -28,8 +28,6 @@ class IndexController extends Controller
      */
     public function create()
     {
-        $categories = 0;
-
         if (Auth::user()->role->id == 2) {
             $categories = Category::all();
         } else {
