@@ -24,19 +24,31 @@
                             class="flex relative justify-between items-center rounded-lg backdrop-blur border border-slate-900/10 dark:border-slate-50/[0.06] bg-black/20 supports-backdrop-blur:bg-white/95 p-3 mb-3">
                             <div class="w-full flex items-start justify-between">
                                 <div class="w-6/12">
-                                    <a href="{{ route('talk.show', [$talk->id]) }}" class="text-lg hover:text-active">{{ $talk->title }}</a>
+                                    <a href="{{ route('talk.show', [$talk->id]) }}"
+                                       class="text-lg hover:text-active">{{ $talk->title }}</a>
                                 </div>
                                 <div class="flex flex-col items-center">
                                     <div class="flex">
                                         <div class="flex flex-col items-end mr-3">
-                                            <a href="{{ route('user', [$talk->user->id]) }}"
-                                               class="font-semibold hover:text-activeLight text-right">{{ $talk->user->username }}</a>
+                                            @if ($talk->user != null)
+                                                <a href="{{ route('user', [$talk->user->id]) }}"
+                                                   class="font-semibold hover:text-activeLight text-right">{{ $talk->user->username }}</a>
+                                            @else
+                                                <span class="font-semibold text-right">Пользователь удалён</span>
+                                            @endif
                                             <span>Автор</span>
                                         </div>
-                                        <a href="{{ route('user', [$talk->user->id]) }}">
-                                            <img class="min-w-[3rem] min-h-[3rem] w-12 h-12"
-                                                 src="{{ asset($talk->user->image) }}" alt="a">
-                                        </a>
+                                        @if ($talk->user != null)
+                                            <a href="{{ route('user', [$talk->user->id]) }}">
+                                                <img class="min-w-[3rem] min-h-[3rem] w-12 h-12"
+                                                     src="{{ asset($talk->user->image) }}" alt="a">
+                                            </a>
+                                        @else
+                                            <span>
+                                                <img class="min-w-[3rem] min-h-[3rem] w-12 h-12"
+                                                     src="{{ asset('images/no-image.jpg') }}" alt="a">
+                                            </span>
+                                        @endif
                                     </div>
                                     <div class="w-full flex items-center justify-end text-slate-400 mt-3">
                                         <div class="flex items-center mr-3">

@@ -12,7 +12,11 @@
             <a href="{{ route('home') }}" class="hover:text-active">Главная</a> > <a
                 href="{{ route('category', [$talk->category->id]) }}"
                 class="hover:text-active">{{ $talk->category->name }}</a> >
-            <span>Обсуждение {{ $talk->user->username }}</span>
+            @if ($talk->user != null)
+                <span>Обсуждение {{ $talk->user->username }}</span>
+            @else
+                <span>Обсуждение удалённого пользователя</span>
+            @endif
         </div>
 
         <div class="w-full flex">
@@ -24,13 +28,25 @@
                         <div class="border-b border-slate-50/[0.06] p-4">
                             <div class="flex justify-between">
                                 <div class="flex">
-                                    <a href="{{ route('user', [$talk->user->id]) }}">
-                                        <img class="min-w-12 min-h-12 w-12 h-12" src="{{ asset($talk->user->image) }}"
-                                             alt="a">
-                                    </a>
-                                    <a href="{{ route('user', [$talk->user->id]) }}" class="ml-3">
-                                        {{ $talk->user->username }}
-                                    </a>
+                                    @if ($talk->user != null)
+                                        <a href="{{ route('user', [$talk->user->id]) }}">
+                                            <img class="min-w-12 min-h-12 w-12 h-12"
+                                                 src="{{ asset($talk->user->image) }}"
+                                                 alt="a">
+                                        </a>
+                                        <a href="{{ route('user', [$talk->user->id]) }}" class="ml-3">
+                                            {{ $talk->user->username }}
+                                        </a>
+                                    @else
+                                        <span>
+                                            <img class="min-w-12 min-h-12 w-12 h-12"
+                                                 src="{{ asset('images/no-image.jpg') }}"
+                                                 alt="a">
+                                        </span>
+                                        <span class="ml-3">
+                                            Пользователь удалён
+                                        </span>
+                                    @endif
                                 </div>
                                 <span
                                     class="font-medium text-sm">{{ date_format_tdmy($talk->created_at) }}</span>
@@ -63,12 +79,22 @@
                         @foreach($talk->comments as $comment)
                             <div
                                 class="flex rounded-lg backdrop-blur border border-slate-900/10 dark:border-slate-50/[0.06] bg-black/20 supports-backdrop-blur:bg-white/95 p-3 mb-3">
-                                <img src="{{ asset($comment->user->image) }}" class="h-16 w-16 mr-4" alt="sss">
+                                @if ($talk->user != null)
+                                    <img src="{{ asset($comment->user->image) }}" class="h-16 w-16 mr-4" alt="sss">
+                                @else
+                                    <img src="{{ asset('images/no-image.jpg') }}" class="h-16 w-16 mr-4" alt="sss">
+                                @endif
                                 <div class="flex flex-col flex-auto">
                                     <div class="flex justify-between border-b border-slate-50/[0.06] mb-2">
-                                        <a class="text-lg" href="{{ route('user', [$comment->user->id]) }}">
-                                            {{ $comment->user->username }}
-                                        </a>
+                                        @if ($talk->user != null)
+                                            <a class="text-lg" href="{{ route('user', [$comment->user->id]) }}">
+                                                {{ $comment->user->username }}
+                                            </a>
+                                        @else
+                                            <span class="text-lg">
+                                                Пользователь удалён
+                                            </span>
+                                        @endif
                                         <span
                                             class="font-medium text-sm text-slate-400">{{ date_format_tdmy($comment->created_at) }}</span>
                                     </div>
