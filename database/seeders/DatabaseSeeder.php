@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
         // roles
 //        \App\Models\Role::factory(4)->create();
         // users
-        \App\Models\User::factory(10)->create();
+//        \App\Models\User::factory(10)->create();
         // achievements
 //        \App\Models\Achievement::factory(10)->create();
         // users_achievements
@@ -42,5 +42,9 @@ class DatabaseSeeder extends Seeder
 //        \App\Models\Complaint::factory(7)->create();
         // news
 //        \App\Models\News::factory(20)->create();
+        // likes
+        \App\Models\Like::factory(600)->create();
+        // talk views
+        \App\Models\TalkView::factory(3000)->create();
     }
 }
