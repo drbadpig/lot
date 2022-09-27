@@ -28,8 +28,16 @@ class IndexController extends Controller
      */
     public function create()
     {
+        $categories = 0;
+
+        if (Auth::user()->role->id == 2) {
+            $categories = Category::all();
+        } else {
+            $categories = Category::all()->where('is_global', true);
+        }
+
         return view('talk.create', [
-            'categories' => Category::all(),
+            'categories' => $categories,
         ]);
     }
 
@@ -65,13 +73,13 @@ class IndexController extends Controller
     public function show(Request $request, $id)
     {
         // add 1 view to table if we do not have a cookie
-        if ($request->cookie('seen-talk-'.$id) == null) {
+        if ($request->cookie('seen-talk-' . $id) == null) {
             TalkView::create([
                 'talk_id' => $id,
                 'user_id' => Auth::id()
             ]);
 
-            Cookie::queue(Cookie::make('seen-talk-'.$id, 'true', 1));
+            Cookie::queue(Cookie::make('seen-talk-' . $id, 'true', 1));
         }
 
         return view('talk.show', [
