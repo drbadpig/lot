@@ -23,8 +23,8 @@ class TalkFactory extends Factory
         return [
             'title' => fake()->sentence(),
             'text' => fake()->text(),
-            'user_id' => fake()->numberBetween(User::first()->id, DB::table('users')->orderBy('id', 'desc')->first()->id),
-            'category_id' => fake()->numberBetween(Category::first()->id, DB::table('categories')->orderBy('id', 'desc')->first()->id),
+            'user_id' => DB::select('select id from users')[array_rand(DB::select('select id from users'))]->id,
+            'category_id' => DB::select('select id from categories')[array_rand(DB::select('select id from categories'))]->id,
         ];
     }
 }

@@ -22,8 +22,8 @@ class CommentFactory extends Factory
     {
         return [
             'text' => fake()->text(),
-            'user_id' => fake()->numberBetween(User::first()->id, DB::table('users')->orderBy('id', 'desc')->first()->id),
-            'talk_id' => fake()->numberBetween(Talk::first()->id, DB::table('talks')->orderBy('id', 'desc')->first()->id),
+            'user_id' => DB::select('select id from users')[array_rand(DB::select('select id from users'))]->id,
+            'talk_id' => DB::select('select id from talks')[array_rand(DB::select('select id from talks'))]->id,
         ];
     }
 }
