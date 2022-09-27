@@ -41,13 +41,14 @@ class CategoryController extends Controller
         $request->validate([
             'name' => ['required', 'string', 'max:25', 'unique:categories'],
             'description' => ['required', 'max:60'],
-            'image' => ['required']
+            'image' => ['required'],
         ]);
 
         $category = Category::create([
             'name' => $request->name,
             'description' => $request->description,
             'image' => $request->image,
+            'category_folder_id' => $request->folder
         ]);
 
         return redirect(route('admin.category.index'));
