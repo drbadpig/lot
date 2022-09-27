@@ -20,12 +20,6 @@
                             <li>
                                 <a class="hover:text-active" href="{{ route('talk.create') }}">Добавить обсуждение</a>
                             </li>
-                            <li>
-                                <a class="hover:text-active" href="#">Категории</a>
-                            </li>
-                            <li>
-                                <a class="hover:text-active" href="#">Обсуждения</a>
-                            </li>
                         </ul>
                     </nav>
 
