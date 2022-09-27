@@ -66,7 +66,7 @@ Route::group(['prefix' => 'settings', 'middleware' => 'auth'], function() {
 
 // admin
 
-Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function() {
+Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function() {
     Route::get('/', [\App\Http\Controllers\Admin\IndexController::class, 'index'])->name('admin');
 
     Route::group(['prefix' => 'users'], function() {
@@ -92,6 +92,12 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function() {
         Route::get('/', [\App\Http\Controllers\Admin\TalkController::class, 'index'])->name('admin.talk.index');
         Route::get('/{id}', [\App\Http\Controllers\Admin\TalkController::class, 'show'])->name('admin.talk.show');
         Route::post('/{id}/delete', [\App\Http\Controllers\Admin\TalkController::class, 'destroy'])->name('admin.talk.destroy');
+    });
+
+    Route::group(['prefix' => 'comments'], function() {
+        Route::get('/', [\App\Http\Controllers\Admin\CommentController::class, 'index'])->name('admin.comment.index');
+        Route::get('/{id}', [\App\Http\Controllers\Admin\CommentController::class, 'show'])->name('admin.comment.show');
+        Route::post('/{id}/delete', [\App\Http\Controllers\Admin\CommentController::class, 'destroy'])->name('admin.comment.destroy');
     });
 
     Route::group(['prefix' => 'backgrounds'], function() {
