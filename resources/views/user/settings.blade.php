@@ -49,17 +49,17 @@
                                  required/>
                     </div>
                 </div>
-                <div class="flex text-lg items-start mb-4">
-                    <div class="w-[200px]">
-                        <span class="">Riot Games</span>
-                    </div>
-                    <div class="w-[400px]">
-                        <div class="flex items-center">
-                            <span class="mr-4">RGID8302848</span>
-                            <a class="text-active hover:text-activeLight" href="#">Отвязать</a>
-                        </div>
-                    </div>
-                </div>
+{{--                <div class="flex text-lg items-start mb-4">--}}
+{{--                    <div class="w-[200px]">--}}
+{{--                        <span class="">Riot Games</span>--}}
+{{--                    </div>--}}
+{{--                    <div class="w-[400px]">--}}
+{{--                        <div class="flex items-center">--}}
+{{--                            <span class="mr-4">RGID8302848</span>--}}
+{{--                            <a class="text-active hover:text-activeLight" href="#">Отвязать</a>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
                 <x-button class="px-12">
                     {{ __('Сохранить') }}
                 </x-button>

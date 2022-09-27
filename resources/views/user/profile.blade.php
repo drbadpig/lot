@@ -82,25 +82,25 @@
                     <span>На сайте с</span>
                     <span class="ml-auto">{{ date_format_my($user->created_at->toDateString()) }}</span>
                 </div>
-                <div class="w-full flex mb-1">
-                    <span>Посещений</span>
-                    <span class="ml-auto">{{ 'ERROR' }}</span>
-                </div>
+{{--                <div class="w-full flex mb-1">--}}
+{{--                    <span>Посещений</span>--}}
+{{--                    <span class="ml-auto">{{ 'ERROR' }}</span>--}}
+{{--                </div>--}}
                 <div class="w-full flex mb-1">
                     <span>Роли</span>
                     <span class="ml-auto">{{ $user->role->name }}</span>
                 </div>
             </div>
-            <span>Игровой ранг: Золото</span>
-            <img class="w-auto mb-6" src="gold.png" alt="rank">
-            <h2 class="text-xl">Достижения</h2>
-            <div
-                class="w-full p-3 mt-4 rounded-lg backdrop-blur border border-slate-900/10 dark:border-slate-50/[0.06] bg-black/20 supports-backdrop-blur:bg-white/95 flex flex-row flex-wrap">
-                @foreach ($user->achievements as $achievement)
-                    <img class="w-28 h-28" src="{{ $achievement->image }}" title="{{ $achievement->name }}"
-                         alt="{{ $achievement->name }}">
-                @endforeach
-            </div>
+{{--            <span>Игровой ранг: Золото</span>--}}
+{{--            <img class="w-auto mb-6" src="gold.png" alt="rank">--}}
+{{--            <h2 class="text-xl">Достижения</h2>--}}
+{{--            <div--}}
+{{--                class="w-full p-3 mt-4 rounded-lg backdrop-blur border border-slate-900/10 dark:border-slate-50/[0.06] bg-black/20 supports-backdrop-blur:bg-white/95 flex flex-row flex-wrap">--}}
+{{--                @foreach ($user->achievements as $achievement)--}}
+{{--                    <img class="w-28 h-28" src="{{ $achievement->image }}" title="{{ $achievement->name }}"--}}
+{{--                         alt="{{ $achievement->name }}">--}}
+{{--                @endforeach--}}
+{{--            </div>--}}
         </div>
 
     </div>
