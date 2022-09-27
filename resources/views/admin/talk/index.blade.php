@@ -28,7 +28,11 @@
                                         <td>{{ $talk->id }}</td>
                                         <td><a href="{{ route('admin.talk.show', [$talk->id]) }}">{{ $talk->title }}</a></td>
                                         <td><a href="{{ route('admin.category.show', [$talk->category->id]) }}">{{ $talk->category->name }}</a></td>
-                                        <td><a href="{{ route('admin.user.show', [$talk->user->id]) }}">{{ $talk->user->username }}</a></td>
+                                        @if ($talk->user != null)
+                                            <td><a href="{{ route('admin.user.show', [$talk->user->id]) }}">{{ $talk->user->username }}</a></td>
+                                        @else
+                                            <td><span>Пользователь удалён</span></td>
+                                        @endif
                                         <td>{{ thousands_format(count($talk->comments)) }}</td>
                                         <td>{{ thousands_format(count($talk->talk_views)) }}</td>
                                     </tr>

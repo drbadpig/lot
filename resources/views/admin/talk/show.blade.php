@@ -31,14 +31,26 @@
             {{ $talk->category->id }}
         </div>
     </div>
-    <div class="row mt-3 text-lg">
-        <div class="col-sm-3">
-            <span>Создатель</span>
+    @if ($talk->user != null)
+        <div class="row mt-3 text-lg">
+            <div class="col-sm-3">
+                <span>Создатель</span>
+            </div>
+            <div class="col-sm-9">
+                {{ $talk->user->username }}
+            </div>
         </div>
-        <div class="col-sm-9">
-            {{ $talk->user->username }}
+    @else
+        <div class="row mt-3 text-lg">
+            <div class="col-sm-3">
+                <span>Создатель</span>
+            </div>
+            <div class="col-sm-9">
+                Пользователь удалён
+            </div>
         </div>
-    </div>
+    @endif
+
     <div class="row mt-3 text-lg">
         <div class="col-sm-3">
             <span>Лайки</span>
