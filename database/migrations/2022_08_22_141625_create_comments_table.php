@@ -20,9 +20,6 @@ return new class extends Migration
             $table->unsignedBigInteger('talk_id');
             $table->foreign('talk_id')->references('id')->on('talks')->onDelete('cascade');
             $table->text('text');
-            $table->boolean('is_edited');
-            $table->unsignedBigInteger('likes');
-            $table->unsignedBigInteger('dislikes');
             $table->timestamps();
             $table->softDeletes();
         });

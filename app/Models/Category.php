@@ -31,7 +31,7 @@ class Category extends Model
 
     public function getComments()
     {
-        $array = DB::select('SELECT comments.id, comments.user_id, comments.text, comments.is_edited, comments.likes, comments.dislikes, comments.created_at, comments.updated_at, comments.deleted_at FROM comments
+        $array = DB::select('SELECT comments.id, comments.user_id, comments.text, comments.created_at, comments.updated_at, comments.deleted_at FROM comments
 join (talks join categories cats on talks.category_id = cats.id )
 	  on comments.talk_id = talks.id
       where category_id = '.$this->id);
