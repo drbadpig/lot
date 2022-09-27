@@ -100,6 +100,14 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a href="{{ route('admin.comment.index') }}" class="nav-link">
+                            <i class="nav-icon fas fa-comment"></i>
+                            <p>
+                                Комментарии
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a href="{{ route('admin.background.index') }}" class="nav-link">
                             <i class="nav-icon fas fa-image"></i>
                             <p>
