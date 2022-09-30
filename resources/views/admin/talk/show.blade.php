@@ -15,6 +15,7 @@
             {{ $talk->title }}
         </div>
     </div>
+    @if($talk->deleted_at == null)
     <div class="row mt-3 text-lg">
         <div class="col-sm-3">
             <span>Содержимое</span>
@@ -23,6 +24,7 @@
             <a class="underline" href="{{ route('talk.show', $talk->id) }}">Посмотреть на сайте</a>
         </div>
     </div>
+    @endif
     <div class="row mt-3 text-lg">
         <div class="col-sm-3">
             <span>Категория</span>
