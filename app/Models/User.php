@@ -72,13 +72,4 @@ class User extends Authenticatable
     {
         return $this->belongsTo(BackgroundImage::class);
     }
-
-    protected static function boot() {
-        parent::boot();
-
-        static::deleting(function($user) {
-            $user->talks()->delete();
-            $user->comments()->delete();
-        });
-    }
 }
