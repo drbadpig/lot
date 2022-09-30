@@ -21,7 +21,7 @@ class TalkLikeController extends Controller
             'user_id' => $request->user_id,
         ]);
 
-        $talk = Talk::find($request->talk_id);
+        $talk = Talk::withTrashed()->find($request->talk_id);
 
         return ['likes' => thousands_format(count($talk->likes)), 'like_id' => $like->id];
     }
