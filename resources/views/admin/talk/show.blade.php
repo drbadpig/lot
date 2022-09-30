@@ -75,8 +75,19 @@
             {{ $talk->created_at }}
         </div>
     </div>
-    <form method="post" action="{{ route('admin.talk.destroy', [$talk->id]) }}">
-        @csrf
-        <button type="submit" class="btn btn-danger mt-3">Удалить</button>
-    </form>
+    @if($talk->deleted_at == null)
+        <form method="post" action="{{ route('admin.talk.destroy', [$talk->id]) }}">
+            @csrf
+            <button type="submit" class="btn btn-danger mt-3">Удалить</button>
+        </form>
+    @else
+        <div class="row mt-3 text-lg">
+            <div class="col-sm-3">
+                <span>Дата удаления</span>
+            </div>
+            <div class="col-sm-9">
+                {{ $talk->deleted_at }}
+            </div>
+        </div>
+    @endif
 </x-admin-layout>

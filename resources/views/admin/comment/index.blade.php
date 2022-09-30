@@ -23,8 +23,16 @@
                                 @foreach($comments as $comment)
                                     <tr>
                                         <td>{{ $comment->id }}</td>
-                                        <td><a href="{{ route('admin.talk.show', [$comment->id]) }}">{{ $comment->talk->title }}</a></td>
-                                        <td><a href="{{ route('admin.user.show', [$comment->user->id]) }}">{{ $comment->user->username }}</a></td>
+                                        @if ($comment->talk != null)
+                                            <td><a href="{{ route('admin.comment.show', [$comment->id]) }}">{{ $comment->talk->title }}</a></td>
+                                        @else
+                                            <td><a href="{{ route('admin.comment.show', [$comment->id]) }}">Тема удалена</a></td>
+                                        @endif
+                                        @if ($comment->user != null)
+                                            <td><a href="{{ route('admin.user.show', [$comment->user->id]) }}">{{ $comment->user->username }}</a></td>
+                                        @else
+                                            <td><span>Пользователь удалён</span></td>
+                                        @endif
                                     </tr>
                                 @endforeach
                                 </tbody>

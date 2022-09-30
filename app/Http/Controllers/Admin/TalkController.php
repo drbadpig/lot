@@ -15,7 +15,7 @@ class TalkController extends Controller
     public function index()
     {
         return view('admin.talk.index', [
-            'talks' => Talk::all()
+            'talks' => Talk::withTrashed()->get()
         ]);
     }
 
@@ -27,7 +27,7 @@ class TalkController extends Controller
     public function show($id)
     {
         return view('admin.talk.show', [
-            'talk' => Talk::find($id),
+            'talk' => Talk::withTrashed()->find($id),
         ]);
     }
 

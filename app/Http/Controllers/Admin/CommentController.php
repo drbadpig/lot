@@ -15,7 +15,7 @@ class CommentController extends Controller
     public function index()
     {
         return view('admin.comment.index', [
-            'comments' => Comment::all()
+            'comments' => Comment::withTrashed()->get()
         ]);
     }
 
@@ -27,7 +27,7 @@ class CommentController extends Controller
     public function show($id)
     {
         return view('admin.comment.show', [
-            'comment' => Comment::find($id),
+            'comment' => Comment::withTrashed()->find($id),
         ]);
     }
 

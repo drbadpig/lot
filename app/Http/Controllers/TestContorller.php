@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class TestContorller extends Controller
 {
@@ -14,20 +15,7 @@ class TestContorller extends Controller
         // get user created at date
         $date = $user->created_at->toDateString();
 
-        dd(strtotime(now()->toDateString()) == strtotime($date));
-        dd(date("G:H", strtotime($date)));
 
-        return $months[$month].date(", Y", strtotime($date));
-
-        // get user role
-        $role = $user->role;
-
-        // get amount of comments
-        $usersComments = $user->comments;
-
-        // get amount of talks
-        $usersTalks = $user->talks;
-
-        dd($date);
+        dd(DB::select('select id from users')[array_rand(DB::select('select id from users'))]->id);
     }
 }
