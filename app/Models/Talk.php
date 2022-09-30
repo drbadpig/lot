@@ -10,6 +10,8 @@ class Talk extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $dates = ['deleted_at'];
+
     protected $fillable = [
         'title',
         'text',
@@ -40,5 +42,13 @@ class Talk extends Model
     public function talk_views()
     {
         return $this->hasMany(TalkView::class);
+    }
+
+    protected static function boot() {
+        parent::boot();
+
+        static::deleting(function($talk) {
+            $talk->comments()->delete();
+        });
     }
 }

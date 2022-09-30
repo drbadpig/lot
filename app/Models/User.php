@@ -13,6 +13,8 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
 
+    protected $dates = ['deleted_at'];
+
     /**
      * The attributes that are mass assignable.
      *
@@ -69,5 +71,14 @@ class User extends Authenticatable
     public function backgroundImage()
     {
         return $this->belongsTo(BackgroundImage::class);
+    }
+
+    protected static function boot() {
+        parent::boot();
+
+        static::deleting(function($user) {
+            $user->talks()->delete();
+            $user->comments()->delete();
+        });
     }
 }
