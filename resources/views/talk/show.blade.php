@@ -79,14 +79,14 @@
                         @foreach($talk->comments as $comment)
                             <div
                                 class="flex rounded-lg backdrop-blur border border-slate-900/10 dark:border-slate-50/[0.06] bg-black/20 supports-backdrop-blur:bg-white/95 p-3 mb-3">
-                                @if ($talk->user != null)
+                                @if ($comment->user != null)
                                     <img src="{{ asset($comment->user->image) }}" class="h-16 w-16 mr-4" alt="sss">
                                 @else
                                     <img src="{{ asset('images/no-image.jpg') }}" class="h-16 w-16 mr-4" alt="sss">
                                 @endif
                                 <div class="flex flex-col flex-auto">
                                     <div class="flex justify-between border-b border-slate-50/[0.06] mb-2">
-                                        @if ($talk->user != null)
+                                        @if ($comment->user != null)
                                             <a class="text-lg" href="{{ route('user', [$comment->user->id]) }}">
                                                 {{ $comment->user->username }}
                                             </a>
